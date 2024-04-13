@@ -133,6 +133,7 @@ func _on_jump_buffer_timeout():
 func _on_dash_timer_timeout():
 	dashing = false
 	velocity.y = clampf(velocity.y, -gravity / 4, INF)
+	velocity.x = clampf(velocity.x, -move_speed, move_speed)
 
 func _on_dash_buffer_timeout():
 	_dash_input_in_buffer = false
