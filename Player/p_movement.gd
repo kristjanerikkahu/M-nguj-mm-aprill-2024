@@ -1,12 +1,17 @@
 extends CharacterBody2D
+class_name Player
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+@export var cloud : PackedScene
 
 @onready var _timer_floor_coyote : Timer = $Timers/PlatformTimers/Coyote
 @onready var _timer_jump_buffer : Timer = $Timers/PlatformTimers/JumpBuffer
 @onready var _timer_dash : Timer = $Timers/AbilityTimers/DashTimer
 @onready var _timer_dash_buffer : Timer = $Timers/PlatformTimers/DashBuffer
+
+@onready var _cloud_spawn_position : Marker2D = $CloudSpawn
 
 var _floor_coyote : bool = true
 var _jump_input_in_buffer : bool = false
@@ -23,6 +28,8 @@ var _dashing : bool = false
 var _can_dash : bool = true
 var _dash_direction : Vector2
 
+var _can_summon_cloud : bool = true
+
 # Handles mostly the movement, avoid checking anything else but movement here
 func _physics_process(delta) -> void:
 	_handle_dash()
@@ -32,9 +39,18 @@ func _physics_process(delta) -> void:
 		_handle_left_right_movement(delta)
 
 	move_and_slide()
+	
+func _process(_delta) -> void:
+	if _can_summon_cloud and Input.is_action_just_pressed("create_cloud"):
+		summon_cloud()
+	
+func summon_cloud() -> void:
+	var cloud_instance : StaticBody2D = cloud.instantiate()
+	cloud_instance.position = _cloud_spawn_position.global_position
+	get_tree().current_scene.add_child(cloud_instance)
 
 #region Movement functions
-#region Up & Down, Jump buffering
+#region Up & Down, Jump, dash
 func _handle_gravity_and_coyote(delta) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -54,16 +70,8 @@ func _handle_jump() -> void:
 		_floor_coyote = false
 		velocity.y = -sqrt(2 * gravity/2 * abs(jump_height))
 
-func _buffer_jump_input() -> void:
-	if Input.is_action_just_pressed("move_jump"):
-		_jump_input_in_buffer = true
-		_timer_jump_buffer.start()
 
-func _buffer_dash_input() -> void:
-	if Input.is_action_just_pressed("move_dash"):
-		_dash_input_in_buffer = true
-		_timer_dash_buffer.start()
-
+# TODO: Cancel dash when colliding?
 func _handle_dash() -> void:
 	_buffer_dash_input()
 	if _can_dash and _dash_input_in_buffer:
@@ -74,6 +82,7 @@ func _handle_dash() -> void:
 		
 	if _dashing:
 		# TODO: Ease out dash
+		# TODO: Add a little bit of upwards motion on timeout
 		velocity = _dash_direction * (dash_lengh / _timer_dash.wait_time)
 	
 #endregion
@@ -96,7 +105,19 @@ func _handle_left_right_movement(delta) -> void:
 	
 #endregion
 
-# Timer timeouts
+#region Input Buffers
+func _buffer_jump_input() -> void:
+	if Input.is_action_just_pressed("move_jump"):
+		_jump_input_in_buffer = true
+		_timer_jump_buffer.start()
+
+func _buffer_dash_input() -> void:
+	if Input.is_action_just_pressed("move_dash"):
+		_dash_input_in_buffer = true
+		_timer_dash_buffer.start()
+#endregion
+
+#region Timer timeouts
 func _on_coyote_timeout():
 	_floor_coyote = false
 
@@ -107,6 +128,6 @@ func _on_dash_timer_timeout():
 	_dashing = false
 	velocity = Vector2.ZERO
 
-
 func _on_dash_buffer_timeout():
 	_dash_input_in_buffer = false
+#endregion

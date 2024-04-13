@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://kqp1xjrimvy8"]
+[gd_scene load_steps=23 format=3 uid="uid://kqp1xjrimvy8"]
 
 [ext_resource type="Script" path="res://Player/p_movement.gd" id="1_w4pfo"]
+[ext_resource type="PackedScene" uid="uid://cjv12ur53dqxf" path="res://Powers/Cloud.tscn" id="2_5rato"]
 [ext_resource type="Texture2D" uid="uid://bbqsiltg8rmyh" path="res://Artwork/Player/idle/000.png" id="2_a8ema"]
 [ext_resource type="Texture2D" uid="uid://ukjtiv0qd82e" path="res://Artwork/Player/idle/001.png" id="3_b148j"]
 [ext_resource type="Texture2D" uid="uid://blkp1v4hibpdj" path="res://Artwork/Player/idle/002.png" id="4_aoyu2"]
@@ -142,6 +143,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_w4pfo")
+cloud = ExtResource("2_5rato")
 jump_height = 128
 move_speed = 400
 dash_lengh = 192
@@ -153,7 +155,7 @@ shape = SubResource("RectangleShape2D_02llt")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cylc7")
 animation = &"walk"
-frame_progress = 0.330233
+frame_progress = 0.119636
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 libraries = {
@@ -181,6 +183,9 @@ one_shot = true
 [node name="DashTimer" type="Timer" parent="Timers/AbilityTimers"]
 wait_time = 0.1
 one_shot = true
+
+[node name="CloudSpawn" type="Marker2D" parent="."]
+position = Vector2(0, 29)
 
 [connection signal="timeout" from="Timers/PlatformTimers/Coyote" to="." method="_on_coyote_timeout"]
 [connection signal="timeout" from="Timers/PlatformTimers/JumpBuffer" to="." method="_on_jump_buffer_timeout"]
