@@ -4,6 +4,9 @@ class_name Player
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var moving : bool = false
+var dashing : bool = false
+
 @export var cloud : PackedScene
 
 @onready var _timer_floor_coyote : Timer = $Timers/PlatformTimers/Coyote
@@ -24,7 +27,6 @@ var _dash_input_in_buffer : bool = false
 
 # TODO: Configure dash length
 @export var dash_lengh : int = 100
-var _dashing : bool = false
 var _can_dash : bool = true
 var _dash_direction : Vector2
 
@@ -33,7 +35,7 @@ var _can_summon_cloud : bool = true
 # Handles mostly the movement, avoid checking anything else but movement here
 func _physics_process(delta) -> void:
 	_handle_dash()
-	if not _dashing:
+	if not dashing:
 		_handle_gravity_and_coyote(delta)
 		_handle_jump()
 		_handle_left_right_movement(delta)
@@ -75,12 +77,12 @@ func _handle_jump() -> void:
 func _handle_dash() -> void:
 	_buffer_dash_input()
 	if _can_dash and _dash_input_in_buffer:
-		_dashing = true
+		dashing = true
 		_dash_direction = (get_global_mouse_position() - position).normalized()
 		_can_dash = false
 		_timer_dash.start()
 		
-	if _dashing:
+	if dashing:
 		# TODO: Ease out dash
 		# TODO: Add a little bit of upwards motion on timeout
 		velocity = _dash_direction * (dash_lengh / _timer_dash.wait_time)
@@ -125,7 +127,7 @@ func _on_jump_buffer_timeout():
 	_jump_input_in_buffer = false
 
 func _on_dash_timer_timeout():
-	_dashing = false
+	dashing = false
 	velocity = Vector2.ZERO
 
 func _on_dash_buffer_timeout():
