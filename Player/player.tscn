@@ -362,10 +362,6 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
-[node name="DashEndFloatTimer" type="Timer" parent="Timers/AbilityTimers"]
-wait_time = 0.1
-one_shot = true
-
 [node name="CloudSpawn" type="Marker2D" parent="."]
 position = Vector2(0, 29)
 
@@ -373,4 +369,3 @@ position = Vector2(0, 29)
 [connection signal="timeout" from="Timers/PlatformTimers/JumpBuffer" to="." method="_on_jump_buffer_timeout"]
 [connection signal="timeout" from="Timers/PlatformTimers/DashBuffer" to="." method="_on_dash_buffer_timeout"]
 [connection signal="timeout" from="Timers/AbilityTimers/DashTimer" to="." method="_on_dash_timer_timeout"]
-[connection signal="timeout" from="Timers/AbilityTimers/DashEndFloatTimer" to="." method="_on_dash_end_float_timer_timeout"]

@@ -13,7 +13,6 @@ var dashing : bool = false
 @onready var _timer_jump_buffer : Timer = $Timers/PlatformTimers/JumpBuffer
 @onready var _timer_dash : Timer = $Timers/AbilityTimers/DashTimer
 @onready var _timer_dash_buffer : Timer = $Timers/PlatformTimers/DashBuffer
-@onready var _timer_dash_end_float : Timer = $Timers/AbilityTimers/DashEndFloatTimer
 
 @onready var _cloud_spawn_position : Marker2D = $CloudSpawn
 
@@ -38,7 +37,7 @@ var _can_summon_cloud : bool = true
 # Handles mostly the movement, avoid checking anything else but movement here
 func _physics_process(delta) -> void:
 	_handle_dash()
-	if not dashing and not _dash_end_floating:
+	if not dashing:
 		_handle_gravity_and_coyote(delta)
 		_handle_jump()
 		_handle_left_right_movement(delta)
@@ -89,7 +88,7 @@ func _handle_dash() -> void:
 		_can_dash = false
 		_timer_dash.start()
 		
-	if dashing and not _dash_end_floating:
+	if dashing:
 		velocity = _dash_direction * (dash_lengh / _timer_dash.wait_time)
 	
 #endregion
@@ -133,15 +132,10 @@ func _on_jump_buffer_timeout():
 
 func _on_dash_timer_timeout():
 	dashing = false
-	velocity = Vector2.ZERO
-	_dash_end_floating = true
-	_timer_dash_end_float.start()
+	velocity.y = clampf(velocity.y, -gravity / 4, INF)
 
 func _on_dash_buffer_timeout():
 	_dash_input_in_buffer = false
-	
-func _on_dash_end_float_timer_timeout():
-	_dash_end_floating = false
 #endregion
 
 
