@@ -8,6 +8,7 @@ var moving : bool = false
 var dashing : bool = false
 
 @export var cloud : PackedScene
+@export var death_particles : PackedScene
 
 @onready var _timer_floor_coyote : Timer = $Timers/PlatformTimers/Coyote
 @onready var _timer_jump_buffer : Timer = $Timers/PlatformTimers/JumpBuffer
@@ -52,6 +53,13 @@ func summon_cloud() -> void:
 	var cloud_instance : StaticBody2D = cloud.instantiate()
 	cloud_instance.position = _cloud_spawn_position.global_position
 	get_tree().current_scene.add_child(cloud_instance)
+
+func die() -> void:
+	var death_particles_instance = death_particles.instantiate()
+	death_particles_instance.position = global_position
+	get_tree().current_scene.add_child(death_particles_instance)
+	death_particles_instance.emitting = true
+	queue_free()
 
 #region Movement functions
 #region Up & Down, Jump, dash

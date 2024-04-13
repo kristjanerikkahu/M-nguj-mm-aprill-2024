@@ -1264,6 +1264,7 @@ sources/0 = SubResource("TileSetAtlasSource_cwwyu")
 position = Vector2(468, 432)
 scale = Vector2(3.16667, 3.16667)
 texture = ExtResource("1_a7v56")
+metadata/_edit_lock_ = true
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(9, 6)

@@ -29,6 +29,20 @@ project/assembly_name="Mängumoos"
 
 enabled=PackedStringArray("res://addons/AS2P/plugin.cfg", "res://addons/ColorPreview/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://Artwork/": "pink",
+"res://Audio/": "yellow",
+"res://Levels/": "teal",
+"res://Player/": "green",
+"res://Powers/": "blue",
+"res://Shaders/": "red",
+"res://addons/": "gray",
+"res://assets/": "gray",
+"res://oak_woods_v1.0/": "gray"
+}
+
 [input]
 
 move_left={
