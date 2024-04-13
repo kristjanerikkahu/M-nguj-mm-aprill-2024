@@ -1,12 +1,12 @@
 extends Node2D
 
-var sun_cd:=false
-var wind_cd:=false
-var cloud_cd:=false
+var sun_cd = false
+var wind_cd  = false
+var cloud_cd = false
 
-var sun=preload("res://Powerid/Sun.tscn")	
-var wind=preload("res://Powerid/wind.tscn")
-var cloud=preload("res://Powerid/Cloud.tscn")
+var sun = preload("res://Powerid/Sun.tscn")	
+var wind = preload("res://Powerid/wind.tscn")
+var cloud = preload("res://Powerid/Cloud.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,9 +18,9 @@ func _process(delta):
 		if Input.is_action_pressed("PÄIKE"):
 			if !sun_cd:
 				summon_paike()
-				sun_cd=true
+				sun_cd = true
 				await get_tree().create_timer(10).timeout
-				sun_cd=false
+				sun_cd = false
 		if Input.is_action_pressed("TUUL"):
 			if !wind_cd:
 				summon_tuul()

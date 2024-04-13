@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://c60hrp2svsvmi"]
+
+[ext_resource type="Script" path="res://Player/p_movement.gd" id="1_r50ki"]
+[ext_resource type="Texture2D" uid="uid://bbiysaatqoxj7" path="res://icon.svg" id="2_ylc14"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8nup"]
+size = Vector2(864, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81vb8"]
+size = Vector2(24, 24)
+
+[sub_resource type="GDScript" id="GDScript_i26sb"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(422, 0)
+shape = SubResource("RectangleShape2D_p8nup")
+
+[node name="Panel" type="Panel" parent="Ground"]
+offset_left = -12.0
+offset_top = -11.0
+offset_right = 854.0
+offset_bottom = 13.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(29, -36)
+script = ExtResource("1_r50ki")
+
+[node name="Icon" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_ylc14")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_81vb8")
+
+[node name="Timers" type="Node" parent="CharacterBody2D"]
+
+[node name="FloorCoyote" type="Timer" parent="CharacterBody2D/Timers"]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpInputBuffer" type="Timer" parent="CharacterBody2D/Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(485, 0)
+
+[node name="RichTextLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_i26sb")

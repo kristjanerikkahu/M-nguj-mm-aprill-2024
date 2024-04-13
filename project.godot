@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="Mängumoos"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ColorPreview/plugin.cfg", "res://addons/GenerateAnimationPlayerFrameTracks/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg")
+
 [input]
 
 move_left={
