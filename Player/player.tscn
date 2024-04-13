@@ -139,6 +139,34 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Animation" id="Animation_jv5yp"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["dash"]
+}
+
 [sub_resource type="Animation" id="Animation_1fcn5"]
 resource_name = "idle"
 length = 2.33333
@@ -168,6 +196,7 @@ tracks/1/keys = {
 "values": ["default"]
 }
 
+<<<<<<< HEAD
 [sub_resource type="Animation" id="Animation_jv5yp"]
 length = 0.1
 loop_mode = 1
@@ -252,6 +281,8 @@ tracks/1/keys = {
 "values": ["fall"]
 }
 
+=======
+>>>>>>> 432ef31d1c835d5f75f08afbae38f2e46f7d23bf
 [sub_resource type="Animation" id="Animation_pxuwo"]
 length = 0.2
 loop_mode = 1
