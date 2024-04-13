@@ -76,7 +76,6 @@ func _handle_jump() -> void:
 		_floor_coyote = false
 		velocity.y = -sqrt(2 * gravity/2 * abs(jump_height))
 
-
 # TODO: Cancel dash when colliding?
 func _handle_dash() -> void:
 	_buffer_dash_input()
@@ -85,6 +84,8 @@ func _handle_dash() -> void:
 		var x_dir = Input.get_axis("move_left", "move_right")
 		var y_dir = Input.get_axis("move_up", "move_down")
 		_dash_direction = Vector2(x_dir, y_dir)
+		if _dash_direction.is_equal_approx(Vector2.ZERO):
+			_dash_direction = Vector2.LEFT if $Sprite.flip_h else Vector2.RIGHT
 		_can_dash = false
 		_timer_dash.start()
 		
@@ -108,7 +109,6 @@ func _handle_left_right_movement(delta) -> void:
 			0, 
 			accel_per_frame
 		)
-	
 #endregion
 
 #region Input Buffers
@@ -122,6 +122,7 @@ func _buffer_dash_input() -> void:
 		_dash_input_in_buffer = true
 		_timer_dash_buffer.start()
 #endregion
+
 
 #region Timer timeouts
 func _on_coyote_timeout():

@@ -19,4 +19,7 @@ func _process(delta):
 		if player.dashing:
 			play("dash")
 		else:
-			play("jump")
+			if player.velocity.y > 0:
+				play("fall")
+			else:
+				play("jump")

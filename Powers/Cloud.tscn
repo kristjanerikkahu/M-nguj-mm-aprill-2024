@@ -1,49 +1,49 @@
 [gd_scene load_steps=14 format=3 uid="uid://cjv12ur53dqxf"]
 
 [ext_resource type="Script" path="res://Powers/Cloud.gd" id="1_wao8v"]
-[ext_resource type="Texture2D" uid="uid://c84040yjm5itb" path="res://Artwork/cloudappear/001.png" id="2_6f8ow"]
-[ext_resource type="Texture2D" uid="uid://dk2ogpwplv1sh" path="res://Artwork/cloudappear/002.png" id="3_w1om8"]
-[ext_resource type="Texture2D" uid="uid://bhjm2680j4ffr" path="res://Artwork/cloudappear/003.png" id="4_fegra"]
-[ext_resource type="Texture2D" uid="uid://8w3r6wvsanik" path="res://Artwork/cloudappear/004.png" id="5_w6ka0"]
-[ext_resource type="Texture2D" uid="uid://cna3fla2a21cb" path="res://Artwork/cloudappear/005.png" id="6_srw1x"]
-[ext_resource type="Texture2D" uid="uid://n7a3svuml12d" path="res://Artwork/cloudappear/006.png" id="7_0xpqh"]
-[ext_resource type="Texture2D" uid="uid://b1makch8kjwdv" path="res://Artwork/cloudappear/007.png" id="8_qkhab"]
-[ext_resource type="Texture2D" uid="uid://cc441u4khg1dk" path="res://Artwork/cloudappear/008.png" id="9_568o2"]
-[ext_resource type="Texture2D" uid="uid://ci5ag4qndlvld" path="res://Artwork/cloudappear/009.png" id="10_1fspt"]
-[ext_resource type="Texture2D" uid="uid://clhncd32thaoq" path="res://Artwork/cloudappear/010.png" id="11_iaj0k"]
+[ext_resource type="Texture2D" uid="uid://c84040yjm5itb" path="res://Artwork/cloudappear/001.png" id="2_nehf7"]
+[ext_resource type="Texture2D" uid="uid://dk2ogpwplv1sh" path="res://Artwork/cloudappear/002.png" id="3_engfd"]
+[ext_resource type="Texture2D" uid="uid://bhjm2680j4ffr" path="res://Artwork/cloudappear/003.png" id="4_40kk8"]
+[ext_resource type="Texture2D" uid="uid://8w3r6wvsanik" path="res://Artwork/cloudappear/004.png" id="5_iva3p"]
+[ext_resource type="Texture2D" uid="uid://cna3fla2a21cb" path="res://Artwork/cloudappear/005.png" id="6_fxq3i"]
+[ext_resource type="Texture2D" uid="uid://n7a3svuml12d" path="res://Artwork/cloudappear/006.png" id="7_e3w8h"]
+[ext_resource type="Texture2D" uid="uid://b1makch8kjwdv" path="res://Artwork/cloudappear/007.png" id="8_q2uhl"]
+[ext_resource type="Texture2D" uid="uid://cc441u4khg1dk" path="res://Artwork/cloudappear/008.png" id="9_1odu7"]
+[ext_resource type="Texture2D" uid="uid://ci5ag4qndlvld" path="res://Artwork/cloudappear/009.png" id="10_nujfe"]
+[ext_resource type="Texture2D" uid="uid://clhncd32thaoq" path="res://Artwork/cloudappear/010.png" id="11_fprcm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_12axk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_6f8ow")
+"texture": ExtResource("2_nehf7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_w1om8")
+"texture": ExtResource("3_engfd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_fegra")
+"texture": ExtResource("4_40kk8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_w6ka0")
+"texture": ExtResource("5_iva3p")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_srw1x")
+"texture": ExtResource("6_fxq3i")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_0xpqh")
+"texture": ExtResource("7_e3w8h")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_qkhab")
+"texture": ExtResource("8_q2uhl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_568o2")
+"texture": ExtResource("9_1odu7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_1fspt")
+"texture": ExtResource("10_nujfe")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_iaj0k")
+"texture": ExtResource("11_fprcm")
 }],
 "loop": false,
 "name": &"default",
@@ -51,7 +51,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6h88"]
-size = Vector2(8, 1)
+size = Vector2(38, 1)
 
 [node name="Cloud" type="StaticBody2D"]
 z_index = 6
@@ -64,14 +64,13 @@ frame = 9
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_y6h88")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 0.5)
-scale = Vector2(1.05, 1.05)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_y6h88")
 debug_color = Color(0.913725, 0, 0.717647, 0.419608)
 
