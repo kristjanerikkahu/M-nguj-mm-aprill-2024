@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bc23wrtvs3jbo" path="res://Artwork/Player/idle/004.png" id="6_xrgos"]
 [ext_resource type="Texture2D" uid="uid://d1luj70iys7jf" path="res://Artwork/Player/idle/005.png" id="7_2wwcl"]
 [ext_resource type="Texture2D" uid="uid://bqwn7y1ey7epp" path="res://Artwork/Player/idle/006.png" id="8_uriiu"]
-<<<<<<< Updated upstream
 [ext_resource type="Texture2D" uid="uid://4ly1lj3uyfb3" path="res://Artwork/Player/walk/000.png" id="9_u2sgv"]
 [ext_resource type="Texture2D" uid="uid://dar2jgjmlutne" path="res://Artwork/Player/walk/001.png" id="10_dxlor"]
 [ext_resource type="Texture2D" uid="uid://bgvr3oydrmydh" path="res://Artwork/Player/walk/002.png" id="11_w670y"]
@@ -17,39 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://cwjt1cqct31ik" path="res://Artwork/Player/walk/005.png" id="14_rwtrg"]
 [ext_resource type="Texture2D" uid="uid://c0fp3pqbyidrb" path="res://Artwork/Player/walk/006.png" id="15_b756g"]
 [ext_resource type="Texture2D" uid="uid://wk4yk86jhec4" path="res://Artwork/Player/walk/007.png" id="16_emeo6"]
-=======
->>>>>>> Stashed changes
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_02llt"]
 size = Vector2(10, 38)
 
-<<<<<<< Updated upstream
-=======
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sonuj"]
-load_path = "res://.godot/imported/000.png-bbce56e92c4e6b21b5d0cf2edf569561.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_krbl5"]
-load_path = "res://.godot/imported/001.png-038938161b929e73e121d8981a5c5dff.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_luo7e"]
-load_path = "res://.godot/imported/002.png-ab678ec3cda4f5d1c83adf8e8254abd0.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7ohmp"]
-load_path = "res://.godot/imported/003.png-9d3c385b4ca6eee0ea865bf43413d00a.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yb4an"]
-load_path = "res://.godot/imported/004.png-2b5798ab0a0364a1b5b5f2e55f183e75.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6sam1"]
-load_path = "res://.godot/imported/005.png-50979f2d38f662eaded653b4342d379b.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vgbym"]
-load_path = "res://.godot/imported/006.png-1f8199377d4fd44dc79813a0b9323af6.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x7kfa"]
-load_path = "res://.godot/imported/007.png-ecd7a5f1ec9df59e2bddf973f0dc6cca.ctex"
-
->>>>>>> Stashed changes
 [sub_resource type="SpriteFrames" id="SpriteFrames_cylc7"]
 animations = [{
 "frames": [{
@@ -80,7 +50,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-<<<<<<< Updated upstream
 "texture": ExtResource("9_u2sgv")
 }, {
 "duration": 1.0,
@@ -103,30 +72,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("16_emeo6")
-=======
-"texture": SubResource("CompressedTexture2D_sonuj")
-}, {
-"duration": 1.0,
-"texture": SubResource("CompressedTexture2D_krbl5")
-}, {
-"duration": 1.0,
-"texture": SubResource("CompressedTexture2D_luo7e")
-}, {
-"duration": 1.0,
-"texture": SubResource("CompressedTexture2D_7ohmp")
-}, {
-"duration": 1.0,
-"texture": SubResource("CompressedTexture2D_yb4an")
-}, {
-"duration": 1.0,
-"texture": SubResource("CompressedTexture2D_6sam1")
-}, {
-"duration": 1.0,
-"texture": SubResource("CompressedTexture2D_vgbym")
-}, {
-"duration": 1.0,
-"texture": SubResource("CompressedTexture2D_x7kfa")
->>>>>>> Stashed changes
 }],
 "loop": true,
 "name": &"walk",
@@ -217,6 +162,7 @@ libraries = {
 [node name="PlatformTimers" type="Node" parent="Timers"]
 
 [node name="Coyote" type="Timer" parent="Timers/PlatformTimers"]
+process_callback = 0
 
 [node name="JumpBuffer" type="Timer" parent="Timers/PlatformTimers"]
 
