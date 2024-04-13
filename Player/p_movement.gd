@@ -4,8 +4,8 @@ extends CharacterBody2D
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@onready var _timer_floor_coyote : Timer = $Timers/FloorCoyote
-@onready var _timer_jump_buffer : Timer = $Timers/JumpInputBuffer
+@onready var _timer_floor_coyote : Timer = $Timers/PlatformTimers/Coyote
+@onready var _timer_jump_buffer : Timer = $Timers/PlatformTimers/JumpBuffer
 
 var _floor_coyote : bool = true
 var _jump_input_in_buffer : bool = false

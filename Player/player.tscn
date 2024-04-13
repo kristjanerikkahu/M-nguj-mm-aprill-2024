@@ -1,18 +1,216 @@
-[gd_scene load_steps=3 format=3 uid="uid://kqp1xjrimvy8"]
+[gd_scene load_steps=22 format=3 uid="uid://kqp1xjrimvy8"]
 
 [ext_resource type="Script" path="res://Player/p_movement.gd" id="1_w4pfo"]
+[ext_resource type="Texture2D" uid="uid://bbqsiltg8rmyh" path="res://Artwork/Player/idle/000.png" id="2_a8ema"]
+[ext_resource type="Texture2D" uid="uid://ukjtiv0qd82e" path="res://Artwork/Player/idle/001.png" id="3_b148j"]
+[ext_resource type="Texture2D" uid="uid://blkp1v4hibpdj" path="res://Artwork/Player/idle/002.png" id="4_aoyu2"]
+[ext_resource type="Texture2D" uid="uid://txvtunbnr4v" path="res://Artwork/Player/idle/003.png" id="5_v8lin"]
+[ext_resource type="Texture2D" uid="uid://bc23wrtvs3jbo" path="res://Artwork/Player/idle/004.png" id="6_xrgos"]
+[ext_resource type="Texture2D" uid="uid://d1luj70iys7jf" path="res://Artwork/Player/idle/005.png" id="7_2wwcl"]
+[ext_resource type="Texture2D" uid="uid://bqwn7y1ey7epp" path="res://Artwork/Player/idle/006.png" id="8_uriiu"]
+<<<<<<< Updated upstream
+[ext_resource type="Texture2D" uid="uid://4ly1lj3uyfb3" path="res://Artwork/Player/walk/000.png" id="9_u2sgv"]
+[ext_resource type="Texture2D" uid="uid://dar2jgjmlutne" path="res://Artwork/Player/walk/001.png" id="10_dxlor"]
+[ext_resource type="Texture2D" uid="uid://bgvr3oydrmydh" path="res://Artwork/Player/walk/002.png" id="11_w670y"]
+[ext_resource type="Texture2D" uid="uid://dbk1t51jog07l" path="res://Artwork/Player/walk/003.png" id="12_r2dnq"]
+[ext_resource type="Texture2D" uid="uid://b5d3040s6dip" path="res://Artwork/Player/walk/004.png" id="13_swehw"]
+[ext_resource type="Texture2D" uid="uid://cwjt1cqct31ik" path="res://Artwork/Player/walk/005.png" id="14_rwtrg"]
+[ext_resource type="Texture2D" uid="uid://c0fp3pqbyidrb" path="res://Artwork/Player/walk/006.png" id="15_b756g"]
+[ext_resource type="Texture2D" uid="uid://wk4yk86jhec4" path="res://Artwork/Player/walk/007.png" id="16_emeo6"]
+=======
+>>>>>>> Stashed changes
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_02llt"]
+size = Vector2(10, 38)
+
+<<<<<<< Updated upstream
+=======
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sonuj"]
+load_path = "res://.godot/imported/000.png-bbce56e92c4e6b21b5d0cf2edf569561.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_krbl5"]
+load_path = "res://.godot/imported/001.png-038938161b929e73e121d8981a5c5dff.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_luo7e"]
+load_path = "res://.godot/imported/002.png-ab678ec3cda4f5d1c83adf8e8254abd0.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7ohmp"]
+load_path = "res://.godot/imported/003.png-9d3c385b4ca6eee0ea865bf43413d00a.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yb4an"]
+load_path = "res://.godot/imported/004.png-2b5798ab0a0364a1b5b5f2e55f183e75.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6sam1"]
+load_path = "res://.godot/imported/005.png-50979f2d38f662eaded653b4342d379b.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vgbym"]
+load_path = "res://.godot/imported/006.png-1f8199377d4fd44dc79813a0b9323af6.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x7kfa"]
+load_path = "res://.godot/imported/007.png-ecd7a5f1ec9df59e2bddf973f0dc6cca.ctex"
+
+>>>>>>> Stashed changes
+[sub_resource type="SpriteFrames" id="SpriteFrames_cylc7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a8ema")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_b148j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_aoyu2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_v8lin")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xrgos")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2wwcl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_uriiu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+<<<<<<< Updated upstream
+"texture": ExtResource("9_u2sgv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_dxlor")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_w670y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_r2dnq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_swehw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_rwtrg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_b756g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_emeo6")
+=======
+"texture": SubResource("CompressedTexture2D_sonuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_krbl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_luo7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_7ohmp")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_yb4an")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_6sam1")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_vgbym")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_x7kfa")
+>>>>>>> Stashed changes
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_1fcn5"]
+length = 2.33333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.666667, 1, 1.33333, 1.66667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["default"]
+}
+
+[sub_resource type="Animation" id="Animation_nvfkf"]
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["walk"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j5dt0"]
+_data = {
+"default": SubResource("Animation_1fcn5"),
+"walk": SubResource("Animation_nvfkf")
+}
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_w4pfo")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 2)
 shape = SubResource("RectangleShape2D_02llt")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cylc7")
+animation = &"walk"
+frame_progress = 0.750308
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_j5dt0")
+}
 
 [node name="Timers" type="Node" parent="."]
 
