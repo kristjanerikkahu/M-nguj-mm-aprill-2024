@@ -4,9 +4,9 @@ var sun_cd = false
 var wind_cd  = false
 var cloud_cd = false
 
-var sun = preload("res://Powerid/Sun.tscn")	
-var wind = preload("res://Powerid/wind.tscn")
-var cloud = preload("res://Powerid/Cloud.tscn")
+var sun = preload("res://Powers/Sun.tscn")	
+var wind = preload("res://Powers/wind.tscn")
+var cloud = preload("res://Powers/Cloud.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

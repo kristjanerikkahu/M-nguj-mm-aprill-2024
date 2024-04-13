@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Levels/LIC.gd" id="1_t2yxo"]
 [ext_resource type="Texture2D" uid="uid://bbiysaatqoxj7" path="res://icon.svg" id="2_eoxsm"]
-[ext_resource type="PackedScene" path="res://Levels/player.tscn" id="2_r6d8e"]
+[ext_resource type="PackedScene" uid="uid://bnsgue4hb1efg" path="res://Levels/player.tscn" id="2_r6d8e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8nup"]
 size = Vector2(864, 20)
