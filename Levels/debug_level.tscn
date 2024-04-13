@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bu75uilau42nt"]
+[gd_scene load_steps=8 format=3 uid="uid://bu75uilau42nt"]
 
 [ext_resource type="Texture2D" uid="uid://dol5aev8hvtew" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="1_3djj2"]
 [ext_resource type="Texture2D" uid="uid://cbclslfye0kym" path="res://oak_woods_v1.0/background/background_layer_1.png" id="1_a7v56"]
@@ -1258,6 +1258,8 @@ texture = ExtResource("1_3djj2")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_cwwyu")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tfxg8"]
+
 [node name="DebugLevel" type="Node2D"]
 
 [node name="BackgroundLayer1" type="Sprite2D" parent="."]
@@ -1282,3 +1284,17 @@ position = Vector2(172, 568)
 [node name="000" type="Sprite2D" parent="."]
 position = Vector2(174, 609)
 texture = ExtResource("4_2o7qd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-64, 135)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(431, 474)
+shape = SubResource("RectangleShape2D_tfxg8")
+
+[node name="Panel" type="Panel" parent="StaticBody2D"]
+offset_left = 420.0
+offset_top = 463.0
+offset_right = 441.0
+offset_bottom = 483.0

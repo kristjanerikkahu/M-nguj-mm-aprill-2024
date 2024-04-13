@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://kqp1xjrimvy8"]
+[gd_scene load_steps=41 format=3 uid="uid://kqp1xjrimvy8"]
 
 [ext_resource type="Script" path="res://Player/p_movement.gd" id="1_w4pfo"]
 [ext_resource type="PackedScene" uid="uid://cjv12ur53dqxf" path="res://Powers/Cloud.tscn" id="2_5rato"]
@@ -319,6 +319,9 @@ _data = {
 "walk": SubResource("Animation_nvfkf")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_unro8"]
+size = Vector2(8, 33)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_w4pfo")
 cloud = ExtResource("2_5rato")
@@ -367,7 +370,17 @@ one_shot = true
 [node name="CloudSpawn" type="Marker2D" parent="."]
 position = Vector2(0, 29)
 
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_unro8")
+debug_color = Color(1, 0, 0, 0.419608)
+
 [connection signal="timeout" from="Timers/PlatformTimers/Coyote" to="." method="_on_coyote_timeout"]
 [connection signal="timeout" from="Timers/PlatformTimers/JumpBuffer" to="." method="_on_jump_buffer_timeout"]
 [connection signal="timeout" from="Timers/PlatformTimers/DashBuffer" to="." method="_on_dash_buffer_timeout"]
 [connection signal="timeout" from="Timers/AbilityTimers/DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="body_entered" from="Hurtbox" to="." method="die" unbinds=1]
