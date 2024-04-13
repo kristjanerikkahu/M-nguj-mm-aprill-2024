@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://kqp1xjrimvy8"]
+
+[ext_resource type="Script" path="res://Player/p_movement.gd" id="1_w4pfo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_02llt"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_w4pfo")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_02llt")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="PlatformTimers" type="Node" parent="Timers"]
+
+[node name="Coyote" type="Timer" parent="Timers/PlatformTimers"]
+
+[node name="JumpBuffer" type="Timer" parent="Timers/PlatformTimers"]
+
+[node name="AbilityTimers" type="Node" parent="Timers"]
