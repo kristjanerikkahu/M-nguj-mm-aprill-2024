@@ -82,7 +82,7 @@ func _handle_dash() -> void:
 		dashing = true
 		var x_dir = Input.get_axis("move_left", "move_right")
 		var y_dir = Input.get_axis("move_up", "move_down")
-		_dash_direction = Vector2(x_dir, y_dir)
+		_dash_direction = Vector2(x_dir, y_dir).normalized()
 		if _dash_direction.is_equal_approx(Vector2.ZERO):
 			_dash_direction = Vector2.LEFT if $Sprite.flip_h else Vector2.RIGHT
 		_can_dash = false
