@@ -13,6 +13,7 @@ var dashing : bool = false
 @onready var _timer_jump_buffer : Timer = $Timers/PlatformTimers/JumpBuffer
 @onready var _timer_dash : Timer = $Timers/AbilityTimers/DashTimer
 @onready var _timer_dash_buffer : Timer = $Timers/PlatformTimers/DashBuffer
+@onready var _timer_dash_end_float : Timer = $Timers/AbilityTimers/DashEndFloatTimer
 
 @onready var _cloud_spawn_position : Marker2D = $CloudSpawn
 
@@ -24,18 +25,20 @@ var _dash_input_in_buffer : bool = false
 @export var acceleration_time = 0.1
 @export var jump_height = 60
 @export var move_speed = 100
+@export var wall_climb_speed = 50
 
 # TODO: Configure dash length
 @export var dash_lengh : int = 100
 var _can_dash : bool = true
 var _dash_direction : Vector2
+var _dash_end_floating : bool = false
 
 var _can_summon_cloud : bool = true
 
 # Handles mostly the movement, avoid checking anything else but movement here
 func _physics_process(delta) -> void:
 	_handle_dash()
-	if not dashing:
+	if not dashing and not _dash_end_floating:
 		_handle_gravity_and_coyote(delta)
 		_handle_jump()
 		_handle_left_right_movement(delta)
@@ -55,6 +58,7 @@ func summon_cloud() -> void:
 #region Up & Down, Jump, dash
 func _handle_gravity_and_coyote(delta) -> void:
 	if not is_on_floor():
+		# TODO: Wall jump?
 		velocity.y += gravity * delta
 		if _timer_floor_coyote.is_stopped:
 			_timer_floor_coyote.start()
@@ -78,13 +82,13 @@ func _handle_dash() -> void:
 	_buffer_dash_input()
 	if _can_dash and _dash_input_in_buffer:
 		dashing = true
-		_dash_direction = (get_global_mouse_position() - position).normalized()
+		var x_dir = Input.get_axis("move_left", "move_right")
+		var y_dir = Input.get_axis("move_up", "move_down")
+		_dash_direction = Vector2(x_dir, y_dir)
 		_can_dash = false
 		_timer_dash.start()
 		
-	if dashing:
-		# TODO: Ease out dash
-		# TODO: Add a little bit of upwards motion on timeout
+	if dashing and not _dash_end_floating:
 		velocity = _dash_direction * (dash_lengh / _timer_dash.wait_time)
 	
 #endregion
@@ -129,7 +133,15 @@ func _on_jump_buffer_timeout():
 func _on_dash_timer_timeout():
 	dashing = false
 	velocity = Vector2.ZERO
+	_dash_end_floating = true
+	_timer_dash_end_float.start()
 
 func _on_dash_buffer_timeout():
 	_dash_input_in_buffer = false
+	
+func _on_dash_end_float_timer_timeout():
+	_dash_end_floating = false
 #endregion
+
+
+
