@@ -12,8 +12,8 @@ var _floor_coyote : bool = true
 var _jump_input_in_buffer : bool = false
 
 @export var acceleration_time = 0.1
-@export var jump_height = 5
-@export var move_speed = 10
+@export var jump_height = 60
+@export var move_speed = 100
 
 # Handles mostly the movement, avoid checking anything else but movement here
 func _physics_process(delta) -> void:
@@ -40,7 +40,7 @@ func _handle_jump() -> void:
 		_timer_jump_buffer.stop()
 		_jump_input_in_buffer = false
 		_floor_coyote = false
-		velocity.y = -sqrt(2 * gravity * abs(jump_height))
+		velocity.y = -sqrt(2 * gravity/2 * abs(jump_height))
 
 func _buffer_jump_input() -> void:
 	if Input.is_action_just_pressed("move_jump"):
