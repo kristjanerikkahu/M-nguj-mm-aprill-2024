@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://cygbhms77oste"]
+[gd_scene load_steps=5 format=3 uid="uid://cygbhms77oste"]
 
-[ext_resource type="Script" path="res://Levels/LIC.gd" id="1_t2yxo"]
 [ext_resource type="Texture2D" uid="uid://bbiysaatqoxj7" path="res://icon.svg" id="2_eoxsm"]
 [ext_resource type="PackedScene" uid="uid://bnsgue4hb1efg" path="res://Levels/player.tscn" id="2_r6d8e"]
 
@@ -11,7 +10,6 @@ size = Vector2(864, 20)
 size = Vector2(28, 49)
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_t2yxo")
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
