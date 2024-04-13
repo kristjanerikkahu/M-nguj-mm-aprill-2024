@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgrh1v4agrxuf"]
+
+[ext_resource type="Texture2D" uid="uid://cbclslfye0kym" path="res://oak_woods_v1.0/background/background_layer_1.png" id="1_qgsn3"]
+
+[node name="Level5" type="Node2D"]
+
+[node name="BackgroundLayer1" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(355, 149)
+scale = Vector2(3.99583, 3.98889)
+texture = ExtResource("1_qgsn3")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
