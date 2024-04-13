@@ -142,6 +142,9 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_w4pfo")
+jump_height = 128
+move_speed = 400
+dash_lengh = 192
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 2)
@@ -150,7 +153,7 @@ shape = SubResource("RectangleShape2D_02llt")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cylc7")
 animation = &"walk"
-frame_progress = 0.750308
+frame_progress = 0.330233
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 libraries = {
@@ -163,7 +166,23 @@ libraries = {
 
 [node name="Coyote" type="Timer" parent="Timers/PlatformTimers"]
 process_callback = 0
+wait_time = 0.1
 
 [node name="JumpBuffer" type="Timer" parent="Timers/PlatformTimers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="DashBuffer" type="Timer" parent="Timers/PlatformTimers"]
+wait_time = 0.1
+one_shot = true
 
 [node name="AbilityTimers" type="Node" parent="Timers"]
+
+[node name="DashTimer" type="Timer" parent="Timers/AbilityTimers"]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="Timers/PlatformTimers/Coyote" to="." method="_on_coyote_timeout"]
+[connection signal="timeout" from="Timers/PlatformTimers/JumpBuffer" to="." method="_on_jump_buffer_timeout"]
+[connection signal="timeout" from="Timers/PlatformTimers/DashBuffer" to="." method="_on_dash_buffer_timeout"]
+[connection signal="timeout" from="Timers/AbilityTimers/DashTimer" to="." method="_on_dash_timer_timeout"]
