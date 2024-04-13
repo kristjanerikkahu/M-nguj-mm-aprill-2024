@@ -1,16 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://cygbhms77oste"]
 
-[ext_resource type="Script" path="res://p_movement.gd" id="1_je1i2"]
+[ext_resource type="Script" path="res://Levels/LIC.gd" id="1_t2yxo"]
 [ext_resource type="Texture2D" uid="uid://bbiysaatqoxj7" path="res://icon.svg" id="2_eoxsm"]
-[ext_resource type="Script" path="res://tl.gd" id="3_1133c"]
+[ext_resource type="PackedScene" uid="uid://bnsgue4hb1efg" path="res://Levels/player.tscn" id="2_r6d8e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8nup"]
 size = Vector2(864, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_81vb8"]
-size = Vector2(24, 24)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mh34"]
+size = Vector2(28, 49)
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_t2yxo")
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
@@ -24,33 +25,16 @@ offset_top = -11.0
 offset_right = 854.0
 offset_bottom = 13.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(29, -36)
-script = ExtResource("1_je1i2")
+[node name="Player" parent="." instance=ExtResource("2_r6d8e")]
+position = Vector2(5, -5)
 
-[node name="Icon" type="Sprite2D" parent="CharacterBody2D"]
-scale = Vector2(0.2, 0.2)
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(204, -34.5)
+scale = Vector2(0.21875, 0.382813)
 texture = ExtResource("2_eoxsm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_81vb8")
-
-[node name="Timers" type="Node" parent="CharacterBody2D"]
-
-[node name="FloorCoyote" type="Timer" parent="CharacterBody2D/Timers"]
-process_callback = 0
-wait_time = 0.1
-one_shot = true
-
-[node name="JumpInputBuffer" type="Timer" parent="CharacterBody2D/Timers"]
-wait_time = 0.1
-one_shot = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(485, 0)
-
-[node name="RichTextLabel" type="Label" parent="."]
-offset_left = 1.0
-offset_right = 41.0
-offset_bottom = 40.0
-script = ExtResource("3_1133c")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(204, -34.5)
+shape = SubResource("RectangleShape2D_8mh34")

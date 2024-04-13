@@ -63,4 +63,6 @@ func _handle_left_right_movement(delta) -> void:
 			0, 
 			accel_per_frame
 		)
+	
 #endregion
+

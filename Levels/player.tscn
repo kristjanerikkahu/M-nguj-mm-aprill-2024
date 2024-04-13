@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnsgue4hb1efg"]
+
+[ext_resource type="Script" path="res://p_movement.gd" id="1_57yj4"]
+[ext_resource type="Texture2D" uid="uid://bbiysaatqoxj7" path="res://icon.svg" id="2_6ibgk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mh7pf"]
+size = Vector2(24, 24)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(29, -36)
+script = ExtResource("1_57yj4")
+
+[node name="Icon" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_6ibgk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_mh7pf")
+
+[node name="Timers" type="Node" parent="CharacterBody2D"]
+
+[node name="FloorCoyote" type="Timer" parent="CharacterBody2D/Timers"]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpInputBuffer" type="Timer" parent="CharacterBody2D/Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position_smoothing_enabled = true
