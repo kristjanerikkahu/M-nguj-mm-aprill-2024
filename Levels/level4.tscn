@@ -17,7 +17,7 @@ metadata/_edit_lock_ = true
 anchor_mode = 0
 
 [node name="Player" parent="." instance=ExtResource("2_3fucq")]
-position = Vector2(88, 230)
+position = Vector2(90, 220)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("3_duelk")
