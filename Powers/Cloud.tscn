@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjv12ur53dqxf"]
+[gd_scene load_steps=3 format=3 uid="uid://cjv12ur53dqxf"]
 
 [ext_resource type="Texture2D" uid="uid://bbiysaatqoxj7" path="res://icon.svg" id="1_ho8py"]
+[ext_resource type="Script" path="res://Powers/Cloud.gd" id="1_wao8v"]
 
 [node name="Node2D" type="Node2D"]
+z_index = 6
+script = ExtResource("1_wao8v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
