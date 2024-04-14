@@ -1,5 +1,5 @@
 extends Node2D
-var dialog=["Wise master: Young pupil... The time has come, your last task to complete your training and become a master weather summoner!","Wise master: You must travel to the THUNDER MOUNTAIN and acquire the blessing of the lighting gods.","Wise master: Are you ready for your last lesson?",""]
+var dialog=["Wise master: Young pupil... The time has come, your last task to complete your training and become a master weather summoner! PRESS ENTER TO CONTINUE","Wise master: You must travel to the THUNDER MOUNTAIN and acquire the blessing of the lighting gods.","Wise master: Are you ready for your last lesson?",""]
 var ind=0
 
 
@@ -10,7 +10,6 @@ func _ready():
 	$Sprite2D.visible=false
 	$AnimatedSprite2D.play("default")
 	$RichTextLabel.text=dialog[ind]
-	#$RichTextLabel.add_font_override("normal_font", load(res://Fonts/04B_03__.TTF))
 	
 
 

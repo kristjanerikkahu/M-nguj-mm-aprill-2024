@@ -173,22 +173,21 @@ frame_progress = 0.596267
 position = Vector2(320, 176)
 texture = ExtResource("36_ybjdy")
 
+[node name="Panel" type="Panel" parent="."]
+offset_left = 43.0
+offset_top = 208.0
+offset_right = 303.0
+offset_bottom = 319.0
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 49.0
 offset_top = 209.0
 offset_right = 305.0
 offset_bottom = 322.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("37_w6rqj")
 theme_override_fonts/bold_font = ExtResource("37_w6rqj")
 theme_override_fonts/italics_font = ExtResource("37_w6rqj")
-
-[node name="Panel" type="Panel" parent="."]
-offset_left = 43.0
-offset_top = 208.0
-offset_right = 303.0
-offset_bottom = 319.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D2" to="." method="_on_animated_sprite_2d_2_animation_finished"]
