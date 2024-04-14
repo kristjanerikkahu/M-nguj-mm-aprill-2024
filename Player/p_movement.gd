@@ -117,7 +117,7 @@ func _get_dash_dir():
 	var y_dir = Input.get_axis("move_up", "move_down")
 	_dash_direction = Vector2(x_dir, y_dir).normalized()
 	if _dash_direction.is_equal_approx(Vector2.ZERO):
-		_dash_direction = Vector2.LEFT if $Sprite.flip_h else Vector2.RIGHT
+		_dash_direction = Vector2.RIGHT if $Sprite.flip_h else Vector2.LEFT
 
 func _emit_dash_particles(dir : Vector2):
 	var followup = _dash_followup.instantiate()
@@ -164,8 +164,8 @@ func _on_jump_buffer_timeout():
 
 func _on_dash_timer_timeout():
 	dashing = false
-	velocity.y = clampf(velocity.y, -gravity / 4, INF)
-	velocity.x = clampf(velocity.x, -move_speed * 1.3, move_speed * 1.3)
+	
+	velocity = velocity.normalized() * move_speed * 1
 	var angle = Vector2.from_angle(_dash_shockwave.rotation)
 	
 	_dash_shockwave.toggle_emission()
