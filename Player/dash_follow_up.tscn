@@ -14,7 +14,6 @@ texture = ExtResource("2_ilok3")
 script = ExtResource("3_tc0gi")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
 one_shot = true
 autostart = true
 

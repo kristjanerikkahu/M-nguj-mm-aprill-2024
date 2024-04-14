@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4qk1m5eqydur"]
+[gd_scene load_steps=7 format=3 uid="uid://c4qk1m5eqydur"]
 
-[ext_resource type="Texture2D" uid="uid://bnl3spi323lfv" path="res://Artwork/finalscene1.png" id="1_j5ojr"]
+[ext_resource type="Texture2D" uid="uid://bhdvxu0jx0t0r" path="res://Artwork/finalscene1.png" id="1_j5ojr"]
 [ext_resource type="Script" path="res://Levels/lopp.gd" id="1_unm6o"]
-[ext_resource type="Texture2D" uid="uid://cq60s6l613xns" path="res://Artwork/finalscene2.png" id="2_yhom1"]
+[ext_resource type="Texture2D" uid="uid://b8gquceqo2qav" path="res://Artwork/finalscene2.png" id="2_yhom1"]
+[ext_resource type="AudioStream" uid="uid://dveeilpyitd50" path="res://Audio/Ending.mp3" id="4_u5yct"]
+[ext_resource type="FontFile" uid="uid://deq6nf3bbgo6f" path="res://Fonts/04B_03__.TTF" id="5_f0p5v"]
+[ext_resource type="PackedScene" uid="uid://cmmk31d282i46" path="res://CREDITS/GodotCredits.tscn" id="5_ireyv"]
 
 [node name="Lopp" type="Node2D"]
 script = ExtResource("1_unm6o")
@@ -14,3 +17,18 @@ texture = ExtResource("1_j5ojr")
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(320, 176)
 texture = ExtResource("2_yhom1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_u5yct")
+autoplay = true
+bus = &"Music"
+
+[node name="Credits" parent="." instance=ExtResource("5_ireyv")]
+offset_left = 323.0
+offset_top = -35.0
+offset_right = 323.0
+offset_bottom = -35.0
+size_flags_horizontal = 4
+to_scene = null
+title_font = ExtResource("5_f0p5v")
+text_font = ExtResource("5_f0p5v")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dp2ug0nuthk7l"]
 
-[ext_resource type="Texture2D" uid="uid://b53utbx7kgki0" path="res://Artwork/particle.png" id="1_0ylc2"]
+[ext_resource type="Texture2D" uid="uid://drh6ashb2mort" path="res://Artwork/particle.png" id="1_0ylc2"]
 [ext_resource type="PackedScene" uid="uid://twfqyyo6mpgk" path="res://Player/airwave.tscn" id="2_hgdmm"]
 
 [sub_resource type="Gradient" id="Gradient_xhue0"]
@@ -60,3 +60,5 @@ randomness = 0.27
 [node name="Airwave" parent="." instance=ExtResource("2_hgdmm")]
 show_behind_parent = true
 position = Vector2(0, 0)
+
+[connection signal="finished" from="." to="Airwave" method="_on_gpu_particles_2d_finished"]
