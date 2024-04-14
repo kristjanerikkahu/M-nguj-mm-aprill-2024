@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://kqp1xjrimvy8"]
+[gd_scene load_steps=46 format=3 uid="uid://kqp1xjrimvy8"]
 
 [ext_resource type="Script" path="res://Player/p_movement.gd" id="1_w4pfo"]
 [ext_resource type="PackedScene" uid="uid://cjv12ur53dqxf" path="res://Powers/Cloud.tscn" id="2_5rato"]
@@ -10,8 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://blkp1v4hibpdj" path="res://Artwork/Player/idle/002.png" id="4_aoyu2"]
 [ext_resource type="Texture2D" uid="uid://d31on6jhtmj7q" path="res://Artwork/Player/dash/006.png" id="4_jr12o"]
 [ext_resource type="Texture2D" uid="uid://f5cfex2uftc4" path="res://Artwork/Player/dash/007.png" id="5_k6wbi"]
+[ext_resource type="PackedScene" uid="uid://d3bv7ng4yjgfj" path="res://Player/landing_particles.tscn" id="5_r5lff"]
 [ext_resource type="Texture2D" uid="uid://txvtunbnr4v" path="res://Artwork/Player/idle/003.png" id="5_v8lin"]
 [ext_resource type="Texture2D" uid="uid://c22cjjob5viql" path="res://Artwork/Player/dash/008.png" id="6_gfncq"]
+[ext_resource type="PackedScene" uid="uid://dkmack77bqlb8" path="res://Player/walking_particles.tscn" id="6_w78se"]
 [ext_resource type="Texture2D" uid="uid://bc23wrtvs3jbo" path="res://Artwork/Player/idle/004.png" id="6_xrgos"]
 [ext_resource type="Texture2D" uid="uid://d1luj70iys7jf" path="res://Artwork/Player/idle/005.png" id="7_2wwcl"]
 [ext_resource type="Texture2D" uid="uid://bqwn7y1ey7epp" path="res://Artwork/Player/idle/006.png" id="8_uriiu"]
@@ -32,9 +34,11 @@
 [ext_resource type="Texture2D" uid="uid://cn50mggnjy3ke" path="res://Artwork/Player/fall/005.png" id="19_y2mxr"]
 [ext_resource type="Script" path="res://Player/player_animations.gd" id="23_15lug"]
 [ext_resource type="PackedScene" uid="uid://dstserf10ia5m" path="res://Player/dash_particles.tscn" id="32_l2imh"]
+[ext_resource type="Script" path="res://Player/WalkingParticles.gd" id="34_ex5y7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_02llt"]
-size = Vector2(10, 38)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a433q"]
+radius = 6.0
+height = 34.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cylc7"]
 animations = [{
@@ -329,18 +333,19 @@ script = ExtResource("1_w4pfo")
 cloud = ExtResource("2_5rato")
 death_particles = ExtResource("3_t3jeu")
 _dash_followup = ExtResource("4_3nokk")
+_landing_particles = ExtResource("5_r5lff")
+_walking_particles = ExtResource("6_w78se")
 jump_height = 90
 move_speed = 142
-dash_lengh = 48
+dash_lengh = 60
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
-shape = SubResource("RectangleShape2D_02llt")
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_a433q")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cylc7")
-animation = &"dash"
-frame_progress = 0.850769
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 libraries = {
@@ -355,6 +360,7 @@ script = ExtResource("23_15lug")
 [node name="Coyote" type="Timer" parent="Timers/PlatformTimers"]
 process_callback = 0
 wait_time = 0.1
+one_shot = true
 
 [node name="JumpBuffer" type="Timer" parent="Timers/PlatformTimers"]
 wait_time = 0.05
@@ -384,11 +390,26 @@ collision_mask = 4
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_unro8")
 debug_color = Color(1, 0, 0, 0.419608)
+metadata/_edit_lock_ = true
 
 [node name="CloudCheck" type="RayCast2D" parent="."]
+
+[node name="LandingParticles" type="Marker2D" parent="."]
+position = Vector2(0, 20)
+
+[node name="WalkingParticles" type="Node2D" parent="."]
+script = ExtResource("34_ex5y7")
+
+[node name="WalkingParticles" type="Marker2D" parent="WalkingParticles"]
+position = Vector2(6, 20)
+gizmo_extents = 3.0
+
+[node name="WalkParticleTimer" type="Timer" parent="WalkingParticles"]
+wait_time = 0.1
 
 [connection signal="timeout" from="Timers/PlatformTimers/Coyote" to="." method="_on_coyote_timeout"]
 [connection signal="timeout" from="Timers/PlatformTimers/JumpBuffer" to="." method="_on_jump_buffer_timeout"]
 [connection signal="timeout" from="Timers/PlatformTimers/DashBuffer" to="." method="_on_dash_buffer_timeout"]
 [connection signal="timeout" from="Timers/AbilityTimers/DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="body_entered" from="Hurtbox" to="." method="die" unbinds=1]
+[connection signal="timeout" from="WalkingParticles/WalkParticleTimer" to="." method="_walking_particle_gen"]
