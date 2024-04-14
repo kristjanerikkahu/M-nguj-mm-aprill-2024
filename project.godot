@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 EzTransitions="*res://addons/ez_transitions/objects/plugin_singleton/plugin_singleton_script.gd"
 Gamemaster="*res://Global Script/gamemaster.gd"
+BgMusic="*res://Global Script/BGMusic.tscn"
 
 [display]
 

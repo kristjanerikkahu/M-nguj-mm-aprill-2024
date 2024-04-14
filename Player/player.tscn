@@ -412,12 +412,16 @@ wait_time = 0.1
 
 [node name="LandSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("36_n444f")
+bus = &"SFX"
 
 [node name="WalkSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("34_o8t5y")
+bus = &"SFX"
 
 [node name="DashSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("38_bsxll")
+volume_db = 8.878
+bus = &"SFX"
 
 [connection signal="timeout" from="Timers/PlatformTimers/Coyote" to="." method="_on_coyote_timeout"]
 [connection signal="timeout" from="Timers/PlatformTimers/JumpBuffer" to="." method="_on_jump_buffer_timeout"]

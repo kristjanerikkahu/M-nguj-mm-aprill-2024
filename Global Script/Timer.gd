@@ -7,4 +7,11 @@ func _process(delta):
 	var seconds = int(floor(time_in_sec)) % 60
 	var minutes = int(floor((time_in_sec / 60.0))) % 60
 	
+	if seconds < 10:
+		seconds = str("0", seconds)
+	if minutes < 10:
+		minutes = str("0", minutes)
+	if decimals < 10:
+		decimals = str("0", decimals)
+	
 	text = str(minutes, ":", seconds, ".", decimals)

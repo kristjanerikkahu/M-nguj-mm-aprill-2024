@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c452j1v6gtygk"]
+[gd_scene load_steps=10 format=3 uid="uid://c452j1v6gtygk"]
 
+[ext_resource type="Script" path="res://Levels/StartMusic.gd" id="1_6fph6"]
 [ext_resource type="PackedScene" uid="uid://kqp1xjrimvy8" path="res://Player/player.tscn" id="2_ytmca"]
 [ext_resource type="TileSet" uid="uid://2ee6s7334ksj" path="res://Levels/tileset.tres" id="3_s8ioe"]
 [ext_resource type="Texture2D" uid="uid://d27y02cfnhh6w" path="res://Artwork/lvl1bg/000.png" id="4_4rjrw"]
@@ -12,6 +13,7 @@
 size = Vector2(51, 167)
 
 [node name="Proov1" type="Node2D"]
+script = ExtResource("1_6fph6")
 
 [node name="Player" parent="." instance=ExtResource("2_ytmca")]
 position = Vector2(30, 251)
