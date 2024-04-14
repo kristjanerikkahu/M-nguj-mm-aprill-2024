@@ -8,14 +8,19 @@ var moving : bool = false
 var dashing : bool = false
 
 @export var cloud : PackedScene
+@export var death_particles : PackedScene
+@export var _dash_followup : PackedScene
 
 @onready var _timer_floor_coyote : Timer = $Timers/PlatformTimers/Coyote
 @onready var _timer_jump_buffer : Timer = $Timers/PlatformTimers/JumpBuffer
 @onready var _timer_dash : Timer = $Timers/AbilityTimers/DashTimer
 @onready var _timer_dash_buffer : Timer = $Timers/PlatformTimers/DashBuffer
-@onready var _timer_dash_end_float : Timer = $Timers/AbilityTimers/DashEndFloatTimer
 
 @onready var _cloud_spawn_position : Marker2D = $CloudSpawn
+@onready var _cloud_check_raycast : RayCast2D = $CloudCheck
+@onready var _dash_shockwave : Node2D = $DashParticles
+
+@onready var _camera : Camera2D = $"../SceneCamera"
 
 var _floor_coyote : bool = true
 var _jump_input_in_buffer : bool = false
@@ -38,7 +43,7 @@ var _can_summon_cloud : bool = true
 # Handles mostly the movement, avoid checking anything else but movement here
 func _physics_process(delta) -> void:
 	_handle_dash()
-	if not dashing and not _dash_end_floating:
+	if not dashing:
 		_handle_gravity_and_coyote(delta)
 		_handle_jump()
 		_handle_left_right_movement(delta)
@@ -46,13 +51,24 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 	
 func _process(_delta) -> void:
-	if _can_summon_cloud and Input.is_action_just_pressed("create_cloud"):
+	if _can_summon_cloud and Input.is_action_just_pressed("create_cloud") \
+	and not is_on_floor():
 		summon_cloud()
 	
 func summon_cloud() -> void:
 	var cloud_instance : StaticBody2D = cloud.instantiate()
 	cloud_instance.position = _cloud_spawn_position.global_position
 	get_tree().current_scene.add_child(cloud_instance)
+	_can_summon_cloud = false
+
+# TODO: Send death handling to master script
+func die() -> void:
+	var death_particles_instance = death_particles.instantiate()
+	death_particles_instance.position = global_position
+	get_tree().current_scene.add_child(death_particles_instance)
+	death_particles_instance.emitting = true
+	Gamemaster.player_death()
+	queue_free()
 
 #region Movement functions
 #region Up & Down, Jump, dash
@@ -66,32 +82,50 @@ func _handle_gravity_and_coyote(delta) -> void:
 		_floor_coyote = true
 		_timer_floor_coyote.stop()
 		_can_dash = true
+		# HACK: Prolly a better way to do thiss
+		var rc_col = _cloud_check_raycast.get_collider()
+		if rc_col and rc_col.owner and rc_col.owner.get_class() != "Cloud":
+			_can_summon_cloud = true
 
 # TODO: Configure jumping to feel snappier
 func _handle_jump() -> void:
 	_buffer_jump_input()
 	if _jump_input_in_buffer and _floor_coyote:
+		_can_dash = true
 		_timer_jump_buffer.stop()
 		_jump_input_in_buffer = false
 		_floor_coyote = false
 		velocity.y = -sqrt(2 * gravity/2 * abs(jump_height))
 
-
 # TODO: Cancel dash when colliding?
 func _handle_dash() -> void:
 	_buffer_dash_input()
 	if _can_dash and _dash_input_in_buffer:
+		_get_dash_dir()
+		_emit_dash_particles(_dash_direction)
+		_camera.shake(_dash_direction)
+		
 		dashing = true
-		var x_dir = Input.get_axis("move_left", "move_right")
-		var y_dir = Input.get_axis("move_up", "move_down")
-		_dash_direction = Vector2(x_dir, y_dir)
 		_can_dash = false
 		_timer_dash.start()
 		
-	if dashing and not _dash_end_floating:
+	if dashing:
 		velocity = _dash_direction * (dash_lengh / _timer_dash.wait_time)
 	
 #endregion
+
+func _get_dash_dir():
+	var x_dir = Input.get_axis("move_left", "move_right")
+	var y_dir = Input.get_axis("move_up", "move_down")
+	_dash_direction = Vector2(x_dir, y_dir).normalized()
+	if _dash_direction.is_equal_approx(Vector2.ZERO):
+		_dash_direction = Vector2.RIGHT if $Sprite.flip_h else Vector2.LEFT
+
+func _emit_dash_particles(dir : Vector2):
+	var followup = _dash_followup.instantiate()
+	followup.dir = _dash_direction
+	followup.position = global_position
+	get_tree().current_scene.add_child(followup)
 
 func _handle_left_right_movement(delta) -> void:
 	var direction : float = Input.get_axis("move_left", "move_right")
@@ -108,7 +142,6 @@ func _handle_left_right_movement(delta) -> void:
 			0, 
 			accel_per_frame
 		)
-	
 #endregion
 
 #region Input Buffers
@@ -123,6 +156,7 @@ func _buffer_dash_input() -> void:
 		_timer_dash_buffer.start()
 #endregion
 
+
 #region Timer timeouts
 func _on_coyote_timeout():
 	_floor_coyote = false
@@ -132,16 +166,12 @@ func _on_jump_buffer_timeout():
 
 func _on_dash_timer_timeout():
 	dashing = false
-	velocity = Vector2.ZERO
-	_dash_end_floating = true
-	_timer_dash_end_float.start()
+	
+	velocity = velocity.normalized() * move_speed * 1
+	var angle = Vector2.from_angle(_dash_shockwave.rotation)
+	
+	_dash_shockwave.toggle_emission()
 
 func _on_dash_buffer_timeout():
 	_dash_input_in_buffer = false
-	
-func _on_dash_end_float_timer_timeout():
-	_dash_end_floating = false
 #endregion
-
-
-

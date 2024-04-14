@@ -1,10 +1,12 @@
-[gd_scene load_steps=31 format=3 uid="uid://kqp1xjrimvy8"]
+[gd_scene load_steps=44 format=3 uid="uid://kqp1xjrimvy8"]
 
 [ext_resource type="Script" path="res://Player/p_movement.gd" id="1_w4pfo"]
 [ext_resource type="PackedScene" uid="uid://cjv12ur53dqxf" path="res://Powers/Cloud.tscn" id="2_5rato"]
 [ext_resource type="Texture2D" uid="uid://bbqsiltg8rmyh" path="res://Artwork/Player/idle/000.png" id="2_a8ema"]
 [ext_resource type="Texture2D" uid="uid://ukjtiv0qd82e" path="res://Artwork/Player/idle/001.png" id="3_b148j"]
 [ext_resource type="Texture2D" uid="uid://dniprki5pit3c" path="res://Artwork/Player/dash/005.png" id="3_gbsmh"]
+[ext_resource type="PackedScene" uid="uid://dp2ug0nuthk7l" path="res://Player/death_particles.tscn" id="3_t3jeu"]
+[ext_resource type="PackedScene" uid="uid://bq8r7070cyydr" path="res://Player/dash_follow_up.tscn" id="4_3nokk"]
 [ext_resource type="Texture2D" uid="uid://blkp1v4hibpdj" path="res://Artwork/Player/idle/002.png" id="4_aoyu2"]
 [ext_resource type="Texture2D" uid="uid://d31on6jhtmj7q" path="res://Artwork/Player/dash/006.png" id="4_jr12o"]
 [ext_resource type="Texture2D" uid="uid://f5cfex2uftc4" path="res://Artwork/Player/dash/007.png" id="5_k6wbi"]
@@ -18,14 +20,23 @@
 [ext_resource type="Texture2D" uid="uid://bgvr3oydrmydh" path="res://Artwork/Player/walk/002.png" id="11_w670y"]
 [ext_resource type="Texture2D" uid="uid://dbk1t51jog07l" path="res://Artwork/Player/walk/003.png" id="12_r2dnq"]
 [ext_resource type="Texture2D" uid="uid://b5d3040s6dip" path="res://Artwork/Player/walk/004.png" id="13_swehw"]
+[ext_resource type="Texture2D" uid="uid://dmm14oklew2fb" path="res://Artwork/Player/fall/000.png" id="14_3kwoy"]
 [ext_resource type="Texture2D" uid="uid://boslkvqs3gsyn" path="res://Artwork/Player/jump.png" id="14_qoio6"]
 [ext_resource type="Texture2D" uid="uid://cwjt1cqct31ik" path="res://Artwork/Player/walk/005.png" id="14_rwtrg"]
+[ext_resource type="Texture2D" uid="uid://dmmxu8dfoyx7q" path="res://Artwork/Player/fall/001.png" id="15_857qk"]
 [ext_resource type="Texture2D" uid="uid://c0fp3pqbyidrb" path="res://Artwork/Player/walk/006.png" id="15_b756g"]
+[ext_resource type="Texture2D" uid="uid://c5qddbjhpcfap" path="res://Artwork/Player/fall/002.png" id="16_0pesr"]
 [ext_resource type="Texture2D" uid="uid://wk4yk86jhec4" path="res://Artwork/Player/walk/007.png" id="16_emeo6"]
+[ext_resource type="Texture2D" uid="uid://br53kbsj2mc8l" path="res://Artwork/Player/fall/003.png" id="17_dyieg"]
+[ext_resource type="Texture2D" uid="uid://cwlgpibcbom73" path="res://Artwork/Player/fall/004.png" id="18_j40mc"]
+[ext_resource type="Texture2D" uid="uid://dynlmdnkco5ng" path="res://Artwork/Player/fall/005.png" id="19_y2mxr"]
 [ext_resource type="Script" path="res://Player/player_animations.gd" id="23_15lug"]
+[ext_resource type="PackedScene" uid="uid://dstserf10ia5m" path="res://Player/dash_particles.tscn" id="32_l2imh"]
+[ext_resource type="Script" path="res://Player/WalkingParticles.gd" id="34_ex5y7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_02llt"]
-size = Vector2(10, 38)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a433q"]
+radius = 6.0
+height = 34.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cylc7"]
 animations = [{
@@ -71,6 +82,29 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_3kwoy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_857qk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_0pesr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_dyieg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_j40mc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_y2mxr")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -136,6 +170,62 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["dash"]
+}
+
+[sub_resource type="Animation" id="Animation_yeudh"]
+length = 2.33333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.666667, 1, 1.33333, 1.66667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["default"]
+}
+
+[sub_resource type="Animation" id="Animation_c0qos"]
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["fall"]
 }
 
 [sub_resource type="Animation" id="Animation_1fcn5"]
@@ -226,25 +316,32 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j5dt0"]
 _data = {
 "dash": SubResource("Animation_jv5yp"),
+"default": SubResource("Animation_yeudh"),
+"fall": SubResource("Animation_c0qos"),
 "idle": SubResource("Animation_1fcn5"),
 "jump": SubResource("Animation_pxuwo"),
 "walk": SubResource("Animation_nvfkf")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_unro8"]
+size = Vector2(8, 33)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_w4pfo")
 cloud = ExtResource("2_5rato")
-jump_height = 80
-move_speed = 256
-dash_lengh = 96
+death_particles = ExtResource("3_t3jeu")
+_dash_followup = ExtResource("4_3nokk")
+jump_height = 90
+move_speed = 142
+dash_lengh = 60
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 2)
-shape = SubResource("RectangleShape2D_02llt")
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_a433q")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cylc7")
-animation = &"dash"
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 libraries = {
@@ -259,30 +356,56 @@ script = ExtResource("23_15lug")
 [node name="Coyote" type="Timer" parent="Timers/PlatformTimers"]
 process_callback = 0
 wait_time = 0.1
+one_shot = true
 
 [node name="JumpBuffer" type="Timer" parent="Timers/PlatformTimers"]
-wait_time = 0.1
+wait_time = 0.05
 one_shot = true
 
 [node name="DashBuffer" type="Timer" parent="Timers/PlatformTimers"]
-wait_time = 0.1
+wait_time = 0.05
 one_shot = true
 
 [node name="AbilityTimers" type="Node" parent="Timers"]
 
 [node name="DashTimer" type="Timer" parent="Timers/AbilityTimers"]
-wait_time = 0.2
-one_shot = true
-
-[node name="DashEndFloatTimer" type="Timer" parent="Timers/AbilityTimers"]
 wait_time = 0.1
 one_shot = true
 
 [node name="CloudSpawn" type="Marker2D" parent="."]
 position = Vector2(0, 29)
 
+[node name="DashParticles" parent="." instance=ExtResource("32_l2imh")]
+visible = false
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_unro8")
+debug_color = Color(1, 0, 0, 0.419608)
+metadata/_edit_lock_ = true
+
+[node name="CloudCheck" type="RayCast2D" parent="."]
+
+[node name="LandingParticles" type="Marker2D" parent="."]
+position = Vector2(0, 20)
+
+[node name="WalkingParticles" type="Node2D" parent="."]
+script = ExtResource("34_ex5y7")
+
+[node name="WalkingParticles" type="Marker2D" parent="WalkingParticles"]
+position = Vector2(6, 20)
+gizmo_extents = 3.0
+
+[node name="WalkParticleTimer" type="Timer" parent="WalkingParticles"]
+wait_time = 0.1
+
 [connection signal="timeout" from="Timers/PlatformTimers/Coyote" to="." method="_on_coyote_timeout"]
 [connection signal="timeout" from="Timers/PlatformTimers/JumpBuffer" to="." method="_on_jump_buffer_timeout"]
 [connection signal="timeout" from="Timers/PlatformTimers/DashBuffer" to="." method="_on_dash_buffer_timeout"]
 [connection signal="timeout" from="Timers/AbilityTimers/DashTimer" to="." method="_on_dash_timer_timeout"]
-[connection signal="timeout" from="Timers/AbilityTimers/DashEndFloatTimer" to="." method="_on_dash_end_float_timer_timeout"]
+[connection signal="body_entered" from="Hurtbox" to="." method="die" unbinds=1]
+[connection signal="timeout" from="WalkingParticles/WalkParticleTimer" to="." method="_walking_particle_gen"]

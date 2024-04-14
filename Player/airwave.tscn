@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://twfqyyo6mpgk"]
+
+[ext_resource type="Shader" path="res://Shaders/airwave.gdshader" id="1_5fvhw"]
+[ext_resource type="Texture2D" uid="uid://dr40lsh0gxp1l" path="res://Artwork/airwave.png" id="2_1wuip"]
+[ext_resource type="Script" path="res://Player/airwave.gd" id="3_27uk3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i5x73"]
+shader = ExtResource("1_5fvhw")
+
+[node name="Airwave" type="Sprite2D"]
+material = SubResource("ShaderMaterial_i5x73")
+position = Vector2(612, 465)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_1wuip")
+script = ExtResource("3_27uk3")
