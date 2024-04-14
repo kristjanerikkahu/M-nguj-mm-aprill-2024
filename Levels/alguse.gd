@@ -10,6 +10,7 @@ func _ready():
 	$Sprite2D.visible=false
 	$AnimatedSprite2D.play("default")
 	$RichTextLabel.text=dialog[ind]
+	#$RichTextLabel.add_font_override("normal_font", load(res://Fonts/04B_03__.TTF))
 	
 
 
