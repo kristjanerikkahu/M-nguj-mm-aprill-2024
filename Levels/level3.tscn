@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://ojigluhnaywt"]
+[gd_scene load_steps=9 format=3 uid="uid://ojigluhnaywt"]
 
 [ext_resource type="PackedScene" uid="uid://kqp1xjrimvy8" path="res://Player/player.tscn" id="2_ohe33"]
 [ext_resource type="TileSet" uid="uid://2ee6s7334ksj" path="res://Levels/tileset.tres" id="3_uxmcp"]
 [ext_resource type="Texture2D" uid="uid://dll13fn1rturx" path="res://Artwork/lvl3bg.png" id="4_8wq0n"]
 [ext_resource type="PackedScene" uid="uid://0rua4gs7iak1" path="res://Player/camera.tscn" id="4_fm2f5"]
 [ext_resource type="Script" path="res://Levels/transp4e.gd" id="5_r1ekt"]
+[ext_resource type="PackedScene" uid="uid://blc432rby38va" path="res://Global Script/Timer_UI.tscn" id="6_kbm5g"]
+[ext_resource type="PackedScene" uid="uid://b58d5cvl5rthl" path="res://Global Script/spawn_point.tscn" id="7_5w23s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vp41l"]
 size = Vector2(102, 63.5)
@@ -33,5 +35,10 @@ script = ExtResource("5_r1ekt")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(657, 130)
 shape = SubResource("RectangleShape2D_vp41l")
+
+[node name="Control" parent="." instance=ExtResource("6_kbm5g")]
+
+[node name="SpawnPoint" parent="." instance=ExtResource("7_5w23s")]
+position = Vector2(21, 288)
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

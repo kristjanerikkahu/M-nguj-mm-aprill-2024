@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsrc8n5tg0j8j"]
+[gd_scene load_steps=9 format=3 uid="uid://dsrc8n5tg0j8j"]
 
 [ext_resource type="PackedScene" uid="uid://kqp1xjrimvy8" path="res://Player/player.tscn" id="1_7c0uk"]
 [ext_resource type="TileSet" uid="uid://2ee6s7334ksj" path="res://Levels/tileset.tres" id="3_hotjj"]
 [ext_resource type="PackedScene" uid="uid://0rua4gs7iak1" path="res://Player/camera.tscn" id="4_68xxd"]
-[ext_resource type="Texture2D" uid="uid://bd4a4rmghpds0" path="res://Artwork/lvl2bg.png" id="4_hl503"]
+[ext_resource type="Texture2D" uid="uid://c51c7qssqlo08" path="res://Artwork/lvl2bg.png" id="4_hl503"]
 [ext_resource type="Script" path="res://Levels/transit3.gd" id="5_1ivep"]
+[ext_resource type="PackedScene" uid="uid://blc432rby38va" path="res://Global Script/Timer_UI.tscn" id="6_14jl1"]
+[ext_resource type="PackedScene" uid="uid://b58d5cvl5rthl" path="res://Global Script/spawn_point.tscn" id="7_7uyv8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8hjit"]
 size = Vector2(42, 99)
@@ -33,5 +35,10 @@ script = ExtResource("5_1ivep")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(641, 194)
 shape = SubResource("RectangleShape2D_8hjit")
+
+[node name="Control" parent="." instance=ExtResource("6_14jl1")]
+
+[node name="SpawnPoint" parent="." instance=ExtResource("7_7uyv8")]
+position = Vector2(37, 234)
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

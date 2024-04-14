@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://c452j1v6gtygk"]
+[gd_scene load_steps=9 format=3 uid="uid://c452j1v6gtygk"]
 
 [ext_resource type="PackedScene" uid="uid://kqp1xjrimvy8" path="res://Player/player.tscn" id="2_ytmca"]
 [ext_resource type="TileSet" uid="uid://2ee6s7334ksj" path="res://Levels/tileset.tres" id="3_s8ioe"]
-[ext_resource type="Texture2D" uid="uid://b830b1v12ulai" path="res://Artwork/lvl1bg/000.png" id="4_4rjrw"]
+[ext_resource type="Texture2D" uid="uid://d27y02cfnhh6w" path="res://Artwork/lvl1bg/000.png" id="4_4rjrw"]
 [ext_resource type="PackedScene" uid="uid://0rua4gs7iak1" path="res://Player/camera.tscn" id="4_83imm"]
 [ext_resource type="Script" path="res://Levels/Area2D.gd" id="5_bkp6f"]
+[ext_resource type="PackedScene" uid="uid://blc432rby38va" path="res://Global Script/Timer_UI.tscn" id="6_b0hjj"]
+[ext_resource type="PackedScene" uid="uid://b58d5cvl5rthl" path="res://Global Script/spawn_point.tscn" id="7_ppuh2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_48rob"]
 size = Vector2(51, 167)
@@ -33,5 +35,10 @@ script = ExtResource("5_bkp6f")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(640, 192.5)
 shape = SubResource("RectangleShape2D_48rob")
+
+[node name="Control" parent="." instance=ExtResource("6_b0hjj")]
+
+[node name="SpawnPoint" parent="." instance=ExtResource("7_ppuh2")]
+position = Vector2(28, 254)
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

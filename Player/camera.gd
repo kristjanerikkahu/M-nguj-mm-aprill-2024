@@ -1,5 +1,8 @@
 extends Camera2D
 
+func _ready():
+	Gamemaster.timing = true
+
 func shake(dir : Vector2) -> void:
 	offset = dir * 5
 	var tween  = create_tween()

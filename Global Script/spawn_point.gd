@@ -9,3 +9,5 @@ func resurrect_player():
 	var p = player.instantiate()
 	p.position = global_position
 	get_tree().current_scene.add_child(p)
+	
+	Gamemaster.timing = true
