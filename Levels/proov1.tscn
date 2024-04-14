@@ -8,6 +8,8 @@
 
 [node name="Player" parent="." instance=ExtResource("2_ytmca")]
 position = Vector2(514, 267)
+acceleration_time = null
+wall_climb_speed = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

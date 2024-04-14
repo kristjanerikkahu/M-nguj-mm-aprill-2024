@@ -18,6 +18,8 @@ anchor_mode = 0
 
 [node name="Player" parent="." instance=ExtResource("2_smm3w")]
 position = Vector2(42, 269)
+acceleration_time = null
+wall_climb_speed = null
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("3_j21gh")
