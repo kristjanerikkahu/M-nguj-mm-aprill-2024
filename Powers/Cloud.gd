@@ -1,4 +1,5 @@
 extends Node2D
+class_name Cloud
 
 # TODO: Particle effects for landing on cloud
 

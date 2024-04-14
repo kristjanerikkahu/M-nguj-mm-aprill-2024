@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq8r7070cyydr"]
+
+[ext_resource type="Shader" path="res://Shaders/shockwave.gdshader" id="1_vdu65"]
+[ext_resource type="Texture2D" uid="uid://b0x6xjjebcl8y" path="res://Artwork/shockwave-2.png" id="2_ilok3"]
+[ext_resource type="Script" path="res://Player/dash_follow_up.gd" id="3_tc0gi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h67ui"]
+shader = ExtResource("1_vdu65")
+
+[node name="DashFollowUp" type="Sprite2D"]
+material = SubResource("ShaderMaterial_h67ui")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_ilok3")
+script = ExtResource("3_tc0gi")
