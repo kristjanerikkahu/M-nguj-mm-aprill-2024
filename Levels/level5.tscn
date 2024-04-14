@@ -4,9 +4,9 @@
 [ext_resource type="TileSet" uid="uid://2ee6s7334ksj" path="res://Levels/tileset.tres" id="3_l431t"]
 [ext_resource type="Script" path="res://Levels/trans6e.gd" id="4_a1u64"]
 [ext_resource type="PackedScene" uid="uid://0rua4gs7iak1" path="res://Player/camera.tscn" id="4_tdnr8"]
-[ext_resource type="Texture2D" uid="uid://chr5f1ntd4pke" path="res://Artwork/lvl5bg.png" id="5_ltrd0"]
+[ext_resource type="Texture2D" uid="uid://cs0yd83vxq87p" path="res://Artwork/lvl5bg.png" id="5_ltrd0"]
 [ext_resource type="PackedScene" uid="uid://blc432rby38va" path="res://Global Script/Timer_UI.tscn" id="6_v5fa3"]
-[ext_resource type="PackedScene" uid="uid://b58d5cvl5rthl" path="res://Global Script/spawn_point.tscn" id="7_ncbdd"]
+[ext_resource type="PackedScene" path="res://Global Script/spawn_point.tscn" id="7_ncbdd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwga4"]
 size = Vector2(25, 80)

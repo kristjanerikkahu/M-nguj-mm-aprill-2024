@@ -1,5 +1,5 @@
 extends Node2D
-var dialog=["Wise master: Young pupil... The time has come, your last task to complete your training and become a master weather summoner!","Wise master: You must travel to the THUNDER MOUNTAIN and acquire the blessing of the lighting gods.","Wise master: Are you ready for your last lesson?",""]
+var dialog=["Wise master: Young pupil... The time has come, your last task to complete your training and become a master weather summoner! PRESS ENTER TO CONTINUE","Wise master: You must travel to the THUNDER MOUNTAIN and acquire the blessing of the lighting gods.","Wise master: Are you ready for your last lesson?",""]
 var ind=0
 
 

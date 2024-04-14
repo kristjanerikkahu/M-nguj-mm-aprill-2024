@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c0fa6f73pb06g"]
+[gd_scene load_steps=40 format=3 uid="uid://c0fa6f73pb06g"]
 
 [ext_resource type="Script" path="res://Levels/alguse.gd" id="1_e7vwg"]
 [ext_resource type="Texture2D" uid="uid://rtcp4unriav4" path="res://Artwork/talkscene/000.png" id="1_uw247"]
@@ -36,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://crmqdtijkfaj7" path="res://Artwork/thumbsup/028.png" id="33_1bj4a"]
 [ext_resource type="Texture2D" uid="uid://dceb1hljt3ht" path="res://Artwork/thumbsup/029.png" id="34_mykiy"]
 [ext_resource type="Texture2D" uid="uid://by576kcpw0qa5" path="res://Artwork/mägi.png" id="36_ybjdy"]
+[ext_resource type="FontFile" uid="uid://1r8wk2hujkvp" path="res://Fonts/04B_03__.TTF" id="37_w6rqj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yy7ra"]
 animations = [{
@@ -172,17 +173,21 @@ frame_progress = 0.596267
 position = Vector2(320, 176)
 texture = ExtResource("36_ybjdy")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 49.0
-offset_top = 209.0
-offset_right = 305.0
-offset_bottom = 322.0
-
 [node name="Panel" type="Panel" parent="."]
 offset_left = 43.0
 offset_top = 208.0
 offset_right = 303.0
 offset_bottom = 319.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 49.0
+offset_top = 209.0
+offset_right = 305.0
+offset_bottom = 322.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("37_w6rqj")
+theme_override_fonts/bold_font = ExtResource("37_w6rqj")
+theme_override_fonts/italics_font = ExtResource("37_w6rqj")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D2" to="." method="_on_animated_sprite_2d_2_animation_finished"]
