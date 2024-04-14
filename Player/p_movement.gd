@@ -144,7 +144,7 @@ func _handle_left_right_movement(delta) -> void:
 
 #region Input Buffers
 func _buffer_jump_input() -> void:
-	if Input.is_action_just_pressed("move_jump"):
+	if Input.is_action_pressed("move_jump"):
 		_jump_input_in_buffer = true
 		_timer_jump_buffer.start()
 
