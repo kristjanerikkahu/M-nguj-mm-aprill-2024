@@ -67,6 +67,7 @@ func die() -> void:
 	death_particles_instance.position = global_position
 	get_tree().current_scene.add_child(death_particles_instance)
 	death_particles_instance.emitting = true
+	Gamemaster.player_death()
 	queue_free()
 
 #region Movement functions

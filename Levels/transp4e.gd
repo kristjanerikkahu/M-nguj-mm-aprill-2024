@@ -12,6 +12,7 @@ func _process(delta):
 
 
 func _on_body_entered(body):
+	Gamemaster.timing = false
 	EzTransitions.set_easing(2, 2)
 	EzTransitions.set_trans(10, 10)
 	EzTransitions.set_timers(1, 0, 1)
