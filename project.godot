@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 EzTransitions="*res://addons/ez_transitions/objects/plugin_singleton/plugin_singleton_script.gd"
 Gamemaster="*res://Global Script/gamemaster.gd"
 BgMusic="*res://Global Script/BGMusic.tscn"
+DeathSound="*res://Global Script/death_sound.tscn"
+RespawnSound="*res://Global Script/RespawnSound.tscn"
 
 [display]
 

@@ -68,7 +68,9 @@ func summon_cloud() -> void:
 	get_tree().current_scene.add_child(cloud_instance)
 	_can_summon_cloud = false
 # TODO: Send death handling to master script
+
 func die() -> void:
+	DeathSound.play()
 	var death_particles_instance = death_particles.instantiate()
 	death_particles_instance.position = global_position
 	get_tree().current_scene.add_child(death_particles_instance)

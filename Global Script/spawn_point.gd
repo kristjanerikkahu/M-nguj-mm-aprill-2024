@@ -4,6 +4,7 @@ extends Marker2D
 
 
 func resurrect_player():
+	RespawnSound.play()
 	$Particles.emitting = true
 	await get_tree().create_timer(0.8).timeout
 	var p = player.instantiate()

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dumrgyhj0dnmk"]
+
+[ext_resource type="AudioStream" uid="uid://b78d46v4svoyv" path="res://Audio/respawn.wav" id="1_l4pa0"]
+
+[node name="RespawnSound" type="AudioStreamPlayer"]
+stream = ExtResource("1_l4pa0")
