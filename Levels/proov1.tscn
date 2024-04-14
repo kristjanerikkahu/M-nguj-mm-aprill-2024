@@ -41,6 +41,4 @@ shape = SubResource("RectangleShape2D_48rob")
 [node name="SpawnPoint" parent="." instance=ExtResource("7_ppuh2")]
 position = Vector2(28, 254)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
