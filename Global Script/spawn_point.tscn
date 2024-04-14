@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://b58d5cvl5rthl"]
+
+[ext_resource type="Script" path="res://Global Script/spawn_point.gd" id="1_8eve7"]
+[ext_resource type="Texture2D" uid="uid://drh6ashb2mort" path="res://Artwork/particle.png" id="2_jy02x"]
+[ext_resource type="PackedScene" uid="uid://kqp1xjrimvy8" path="res://Player/player.tscn" id="2_t4cmd"]
+
+[sub_resource type="Curve" id="Curve_3xvw2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.193333, 1), 0.0, -3.73048, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cbhnr"]
+curve = SubResource("Curve_3xvw2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x5p10"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 90.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -280.0
+radial_accel_max = -280.0
+scale_curve = SubResource("CurveTexture_cbhnr")
+
+[node name="SpawnPoint" type="Marker2D"]
+script = ExtResource("1_8eve7")
+player = ExtResource("2_t4cmd")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_x5p10")
+texture = ExtResource("2_jy02x")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
