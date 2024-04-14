@@ -1,5 +1,12 @@
 extends Node
 
+var timer_in_seconds = 0
+var timing : bool = false
+
+func _process(delta):
+	if timing:
+		timer_in_seconds += delta
+
 func player_death():
 	var timer = get_tree().create_timer(2)
 	await timer.timeout
