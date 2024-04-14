@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://kqp1xjrimvy8" path="res://Player/player.tscn" id="2_smm3w"]
 [ext_resource type="TileSet" uid="uid://2ee6s7334ksj" path="res://Levels/tileset.tres" id="3_j21gh"]
-[ext_resource type="Texture2D" uid="uid://dxbuxmhmcsowj" path="res://Artwork/bglast.png" id="4_v4mrs"]
+[ext_resource type="Texture2D" uid="uid://bfq70p4l4wi47" path="res://Artwork/bglast.png" id="4_v4mrs"]
 [ext_resource type="PackedScene" uid="uid://0rua4gs7iak1" path="res://Player/camera.tscn" id="4_yhn1x"]
-[ext_resource type="Texture2D" uid="uid://cgc5x7tqbpp4t" path="res://Artwork/fglast.png" id="5_vv2sy"]
+[ext_resource type="Texture2D" uid="uid://rms5rem57ns0" path="res://Artwork/fglast.png" id="5_vv2sy"]
 [ext_resource type="PackedScene" uid="uid://blc432rby38va" path="res://Global Script/Timer_UI.tscn" id="6_8w8k1"]
-[ext_resource type="PackedScene" path="res://Global Script/spawn_point.tscn" id="7_fj7ik"]
+[ext_resource type="PackedScene" uid="uid://b58d5cvl5rthl" path="res://Global Script/spawn_point.tscn" id="7_fj7ik"]
 [ext_resource type="Script" path="res://Levels/loppu.gd" id="8_gcitk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tdlwp"]
