@@ -20,6 +20,8 @@ var dashing : bool = false
 @onready var _cloud_check_raycast : RayCast2D = $CloudCheck
 @onready var _dash_shockwave : Node2D = $DashParticles
 
+@onready var _camera : Camera2D = $"../SceneCamera"
+
 var _floor_coyote : bool = true
 var _jump_input_in_buffer : bool = false
 var _dash_input_in_buffer : bool = false
@@ -98,10 +100,8 @@ func _handle_dash() -> void:
 	_buffer_dash_input()
 	if _can_dash and _dash_input_in_buffer:
 		_get_dash_dir()
-		var followup = _dash_followup.instantiate()
-		followup.dir = _dash_direction
-		followup.position = global_position
-		get_tree().current_scene.add_child(followup)
+		_emit_dash_particles(_dash_direction)
+		_camera.shake(_dash_direction)
 		
 		dashing = true
 		_can_dash = false
@@ -120,8 +120,10 @@ func _get_dash_dir():
 		_dash_direction = Vector2.LEFT if $Sprite.flip_h else Vector2.RIGHT
 
 func _emit_dash_particles(dir : Vector2):
-	_dash_shockwave.rotation = _dash_direction.angle() - PI/2
-	_dash_shockwave.toggle_emission()
+	var followup = _dash_followup.instantiate()
+	followup.dir = _dash_direction
+	followup.position = global_position
+	get_tree().current_scene.add_child(followup)
 
 func _handle_left_right_movement(delta) -> void:
 	var direction : float = Input.get_axis("move_left", "move_right")
@@ -163,7 +165,7 @@ func _on_jump_buffer_timeout():
 func _on_dash_timer_timeout():
 	dashing = false
 	velocity.y = clampf(velocity.y, -gravity / 4, INF)
-	velocity.x = clampf(velocity.x, -move_speed, move_speed)
+	velocity.x = clampf(velocity.x, -move_speed * 1.3, move_speed * 1.3)
 	var angle = Vector2.from_angle(_dash_shockwave.rotation)
 	
 	_dash_shockwave.toggle_emission()

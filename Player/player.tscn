@@ -367,7 +367,7 @@ one_shot = true
 [node name="AbilityTimers" type="Node" parent="Timers"]
 
 [node name="DashTimer" type="Timer" parent="Timers/AbilityTimers"]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="CloudSpawn" type="Marker2D" parent="."]
