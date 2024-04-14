@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://ojigluhnaywt"]
+[gd_scene load_steps=7 format=3 uid="uid://ojigluhnaywt"]
 
 [ext_resource type="PackedScene" uid="uid://kqp1xjrimvy8" path="res://Player/player.tscn" id="2_ohe33"]
 [ext_resource type="TileSet" uid="uid://2ee6s7334ksj" path="res://Levels/tileset.tres" id="3_uxmcp"]
 [ext_resource type="Texture2D" uid="uid://cnr860qodprst" path="res://Artwork/lvl3bg.png" id="4_8wq0n"]
 [ext_resource type="PackedScene" uid="uid://0rua4gs7iak1" path="res://Player/camera.tscn" id="4_fm2f5"]
+[ext_resource type="Script" path="res://Levels/transp4e.gd" id="5_r1ekt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vp41l"]
+size = Vector2(102, 63.5)
 
 [node name="Level3" type="Node2D"]
 
@@ -22,3 +26,12 @@ anchor_mode = 0
 z_index = -10
 position = Vector2(320, 176)
 texture = ExtResource("4_8wq0n")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("5_r1ekt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(657, 130)
+shape = SubResource("RectangleShape2D_vp41l")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

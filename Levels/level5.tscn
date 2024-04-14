@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgrh1v4agrxuf"]
+[gd_scene load_steps=6 format=3 uid="uid://bgrh1v4agrxuf"]
 
 [ext_resource type="PackedScene" uid="uid://kqp1xjrimvy8" path="res://Player/player.tscn" id="2_gxcn4"]
 [ext_resource type="TileSet" uid="uid://2ee6s7334ksj" path="res://Levels/tileset.tres" id="3_l431t"]
+[ext_resource type="Script" path="res://Levels/trans6e.gd" id="4_a1u64"]
 [ext_resource type="PackedScene" uid="uid://0rua4gs7iak1" path="res://Player/camera.tscn" id="4_tdnr8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwga4"]
+size = Vector2(54, 80)
 
 [node name="Level5" type="Node2D"]
 
@@ -16,3 +20,12 @@ layer_0/tile_data = PackedInt32Array(1310720, 262144, 4, 1376256, 262144, 5, 131
 
 [node name="SceneCamera" parent="." instance=ExtResource("4_tdnr8")]
 anchor_mode = 0
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("4_a1u64")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(640, 16)
+shape = SubResource("RectangleShape2D_pwga4")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

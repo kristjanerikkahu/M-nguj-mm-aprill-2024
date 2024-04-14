@@ -10,24 +10,17 @@ var dashing : bool = false
 @export var cloud : PackedScene
 @export var death_particles : PackedScene
 @export var _dash_followup : PackedScene
-@export var _landing_particles : PackedScene
-@export var _walking_particles : PackedScene
 
 @onready var _timer_floor_coyote : Timer = $Timers/PlatformTimers/Coyote
 @onready var _timer_jump_buffer : Timer = $Timers/PlatformTimers/JumpBuffer
 @onready var _timer_dash : Timer = $Timers/AbilityTimers/DashTimer
 @onready var _timer_dash_buffer : Timer = $Timers/PlatformTimers/DashBuffer
-@onready var _timer_walk_particle : Timer = $WalkingParticles/WalkParticleTimer
 
 @onready var _cloud_spawn_position : Marker2D = $CloudSpawn
 @onready var _cloud_check_raycast : RayCast2D = $CloudCheck
 @onready var _dash_shockwave : Node2D = $DashParticles
 
-@onready var _landing_particles_position : Marker2D = $LandingParticles
-@onready var _walk_particles_position : Marker2D = $WalkingParticles/WalkingParticles
-
 @onready var _camera : Camera2D = $"../SceneCamera"
-@onready var _sprite : AnimatedSprite2D = $Sprite
 
 var _floor_coyote : bool = true
 var _jump_input_in_buffer : bool = false
@@ -46,8 +39,6 @@ var _dash_direction : Vector2
 var _dash_end_floating : bool = false
 
 var _can_summon_cloud : bool = true
-
-var _is_grounded : bool = true
 
 # Handles mostly the movement, avoid checking anything else but movement here
 func _physics_process(delta) -> void:
@@ -83,38 +74,17 @@ func die() -> void:
 func _handle_gravity_and_coyote(delta) -> void:
 	if not is_on_floor():
 		# TODO: Wall jump?
-		_is_grounded = false
 		velocity.y += gravity * delta
-		if _timer_floor_coyote.is_stopped():
+		if _timer_floor_coyote.is_stopped:
 			_timer_floor_coyote.start()
-		
-		print("stopping walk particle timer")
-		_timer_walk_particle.stop()
 	else:
 		_floor_coyote = true
 		_timer_floor_coyote.stop()
 		_can_dash = true
-		
-		if not _is_grounded:
-			_landing_particle_gen()
-			_is_grounded = true
-		
 		# HACK: Prolly a better way to do thiss
 		var rc_col = _cloud_check_raycast.get_collider()
 		if rc_col and rc_col.owner and rc_col.owner.get_class() != "Cloud":
 			_can_summon_cloud = true
-
-func _landing_particle_gen():
-	var part = _landing_particles.instantiate()
-	part.position = _landing_particles_position.global_position
-	get_tree().current_scene.add_child(part)
-
-func _walking_particle_gen():
-	print("yo")
-	var part = _walking_particles.instantiate()
-	part.position = _walk_particles_position.global_position
-	part.get_node("WalkingParticles").flip_h = _sprite.flip_h
-	get_tree().current_scene.add_child(part)
 
 # TODO: Configure jumping to feel snappier
 func _handle_jump() -> void:
@@ -148,7 +118,7 @@ func _get_dash_dir():
 	var y_dir = Input.get_axis("move_up", "move_down")
 	_dash_direction = Vector2(x_dir, y_dir).normalized()
 	if _dash_direction.is_equal_approx(Vector2.ZERO):
-		_dash_direction = Vector2.UP
+		_dash_direction = Vector2.RIGHT if $Sprite.flip_h else Vector2.LEFT
 
 func _emit_dash_particles(dir : Vector2):
 	var followup = _dash_followup.instantiate()
@@ -160,16 +130,12 @@ func _handle_left_right_movement(delta) -> void:
 	var direction : float = Input.get_axis("move_left", "move_right")
 	var accel_per_frame = (move_speed / acceleration_time) * delta
 	if direction:
-		if _timer_walk_particle.is_stopped() and _is_grounded:
-			print("starting walk particle timer")
-			_timer_walk_particle.start()
 		velocity.x = move_toward(
 			velocity.x, 
 			move_speed * direction, 
 			accel_per_frame
 		)
 	else:
-		_timer_walk_particle.stop()
 		velocity.x = move_toward(
 			velocity.x, 
 			0, 
