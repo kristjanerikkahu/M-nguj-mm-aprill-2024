@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c452j1v6gtygk"]
+[gd_scene load_steps=5 format=3 uid="uid://c452j1v6gtygk"]
 
 [ext_resource type="PackedScene" uid="uid://kqp1xjrimvy8" path="res://Player/player.tscn" id="2_ytmca"]
 [ext_resource type="TileSet" uid="uid://2ee6s7334ksj" path="res://Levels/tileset.tres" id="3_s8ioe"]
+[ext_resource type="Texture2D" uid="uid://b830b1v12ulai" path="res://Artwork/lvl1bg/000.png" id="4_4rjrw"]
 [ext_resource type="PackedScene" uid="uid://0rua4gs7iak1" path="res://Player/camera.tscn" id="4_83imm"]
 
 [node name="Proov1" type="Node2D"]
@@ -16,3 +17,8 @@ layer_0/tile_data = PackedInt32Array(1310728, 393220, 6, 1245193, 65540, 3, 1310
 
 [node name="SceneCamera" parent="." instance=ExtResource("4_83imm")]
 anchor_mode = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(320, 176)
+texture = ExtResource("4_4rjrw")
