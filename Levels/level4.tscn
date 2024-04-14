@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cbclslfye0kym" path="res://oak_woods_v1.0/background/background_layer_1.png" id="1_a6efr"]
 [ext_resource type="PackedScene" uid="uid://kqp1xjrimvy8" path="res://Player/player.tscn" id="2_3fucq"]
-[ext_resource type="TileSet" uid="uid://ecda3yk3illh" path="res://Levels/tileset.tres" id="3_duelk"]
+[ext_resource type="TileSet" uid="uid://2ee6s7334ksj" path="res://Levels/tileset.tres" id="3_duelk"]
 [ext_resource type="PackedScene" uid="uid://0rua4gs7iak1" path="res://Player/camera.tscn" id="4_lcg12"]
 
 [node name="Level4" type="Node2D"]
