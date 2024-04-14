@@ -90,6 +90,7 @@ func _handle_gravity_and_coyote(delta) -> void:
 func _handle_jump() -> void:
 	_buffer_jump_input()
 	if _jump_input_in_buffer and _floor_coyote:
+		_can_dash = true
 		_timer_jump_buffer.stop()
 		_jump_input_in_buffer = false
 		_floor_coyote = false
@@ -144,7 +145,7 @@ func _handle_left_right_movement(delta) -> void:
 
 #region Input Buffers
 func _buffer_jump_input() -> void:
-	if Input.is_action_pressed("move_jump"):
+	if Input.is_action_just_pressed("move_jump"):
 		_jump_input_in_buffer = true
 		_timer_jump_buffer.start()
 

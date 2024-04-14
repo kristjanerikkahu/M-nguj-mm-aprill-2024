@@ -1,10 +1,10 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://ecda3yk3illh"]
+[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://2ee6s7334ksj"]
 
-[ext_resource type="Texture2D" uid="uid://dw7dmldanhdmo" path="res://Artwork/stone.png" id="1_k4dl7"]
-[ext_resource type="Texture2D" uid="uid://cgl1rfc04qkx5" path="res://Artwork/kivi2.png" id="2_qvmlw"]
-[ext_resource type="Texture2D" uid="uid://b250hkr7pjfai" path="res://Artwork/puitplank.png" id="3_1enna"]
-[ext_resource type="Texture2D" uid="uid://clki2hx3wf2m8" path="res://Artwork/spikes.png" id="4_nn4ih"]
-[ext_resource type="Texture2D" uid="uid://cj2i2kojn6wh8" path="res://Artwork/pilvplank.png" id="5_3f74r"]
+[ext_resource type="Texture2D" uid="uid://belk848gjpr7m" path="res://Artwork/stone.png" id="1_k4dl7"]
+[ext_resource type="Texture2D" uid="uid://o0d6ffg3vhot" path="res://Artwork/kivi2.png" id="2_qvmlw"]
+[ext_resource type="Texture2D" uid="uid://cl82illvruve3" path="res://Artwork/puitplank.png" id="3_1enna"]
+[ext_resource type="Texture2D" uid="uid://7mef7isd3s4f" path="res://Artwork/spikes.png" id="4_nn4ih"]
+[ext_resource type="Texture2D" uid="uid://c0yp7l1n7dthr" path="res://Artwork/pilvplank.png" id="5_3f74r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ol4tf"]
 texture = ExtResource("1_k4dl7")
