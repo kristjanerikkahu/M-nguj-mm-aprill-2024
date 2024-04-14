@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3bv7ng4yjgfj"]
+
+[ext_resource type="Script" path="res://LandingParticles.gd" id="1_wkxdq"]
+[ext_resource type="Texture2D" uid="uid://cumb25sw5ciqp" path="res://Artwork/Landing particles/000.png" id="2_q32wf"]
+[ext_resource type="Texture2D" uid="uid://bwy0rf46fe6ns" path="res://Artwork/Landing particles/001.png" id="3_tesgo"]
+[ext_resource type="Texture2D" uid="uid://yn6gmhi1lhdx" path="res://Artwork/Landing particles/002.png" id="4_1dyl3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3c76g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q32wf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tesgo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1dyl3")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rrjeo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q32wf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tesgo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1dyl3")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="LandingParticles" type="Node2D"]
+script = ExtResource("1_wkxdq")
+
+[node name="Right" type="AnimatedSprite2D" parent="."]
+position = Vector2(9, -3)
+sprite_frames = SubResource("SpriteFrames_3c76g")
+autoplay = "default"
+
+[node name="Left" type="AnimatedSprite2D" parent="."]
+position = Vector2(-9, -3)
+sprite_frames = SubResource("SpriteFrames_rrjeo")
+autoplay = "default"
+flip_h = true
+
+[connection signal="animation_finished" from="Right" to="." method="_on_right_animation_finished"]
