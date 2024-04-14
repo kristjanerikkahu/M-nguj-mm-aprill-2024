@@ -1,11 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dstserf10ia5m"]
+[gd_scene load_steps=9 format=3 uid="uid://dstserf10ia5m"]
 
 [ext_resource type="Texture2D" uid="uid://d2pe0b253vr8t" path="res://Artwork/dash_particle.png" id="1_dar2v"]
-[ext_resource type="Shader" path="res://Shaders/shockwave.gdshader" id="1_jxl5n"]
 [ext_resource type="Script" path="res://Player/dash_particles.gd" id="1_xxxsg"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_68s7a"]
-shader = ExtResource("1_jxl5n")
 
 [sub_resource type="Curve" id="Curve_8khgn"]
 _data = [Vector2(0, 0.362637), 0.0, 0.0, 0, 0, Vector2(1, 0.362637), 0.0, 0.0, 0, 0]
@@ -65,14 +61,12 @@ scale_max = 0.3
 scale_curve = SubResource("CurveXYZTexture_aq6lc")
 
 [node name="DashParticles" type="Node2D"]
-material = SubResource("ShaderMaterial_68s7a")
 script = ExtResource("1_xxxsg")
 
 [node name="P1" type="GPUParticles2D" parent="."]
 use_parent_material = true
 position = Vector2(-5, 50)
 rotation = -0.00876698
-emitting = false
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_dn5bt")
 texture = ExtResource("1_dar2v")
@@ -82,7 +76,6 @@ speed_scale = 3.65
 use_parent_material = true
 position = Vector2(5, 50)
 rotation = -0.00876698
-emitting = false
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_8q810")
 texture = ExtResource("1_dar2v")

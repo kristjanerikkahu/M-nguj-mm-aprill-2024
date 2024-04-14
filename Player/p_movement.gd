@@ -103,6 +103,8 @@ func _handle_dash() -> void:
 		followup.position = global_position
 		get_tree().current_scene.add_child(followup)
 
+		var camera2D : Camera2DPlus = $Camera
+		camera2D
 		
 		dashing = true
 		_can_dash = false

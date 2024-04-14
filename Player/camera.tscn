@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://0rua4gs7iak1"]
 
-[ext_resource type="Script" path="res://SceneCamera.gd" id="1_3rq66"]
+[ext_resource type="Script" path="res://addons/camera_2d_plus/objects/camera_2d_plus/camera_2d_plus_script.gd" id="1_gwmvl"]
 
-[node name="Camera" type="Camera2D"]
-script = ExtResource("1_3rq66")
+[node name="Camera2DPlus" type="Camera2D"]
+script = ExtResource("1_gwmvl")

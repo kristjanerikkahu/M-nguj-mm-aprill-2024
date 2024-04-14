@@ -329,9 +329,9 @@ script = ExtResource("1_w4pfo")
 cloud = ExtResource("2_5rato")
 death_particles = ExtResource("3_t3jeu")
 _dash_followup = ExtResource("4_3nokk")
-jump_height = 80
-move_speed = 256
-dash_lengh = 96
+jump_height = 90
+move_speed = 142
+dash_lengh = 48
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
@@ -374,6 +374,7 @@ one_shot = true
 position = Vector2(0, 29)
 
 [node name="DashParticles" parent="." instance=ExtResource("32_l2imh")]
+visible = false
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
