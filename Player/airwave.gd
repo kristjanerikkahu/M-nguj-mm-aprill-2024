@@ -2,6 +2,9 @@ extends Sprite2D
 
 var speed : float = 3
 
+func _ready():
+	owner.emitting = true
+
 func _process(delta):
 	scale += speed * delta * Vector2.ONE
 

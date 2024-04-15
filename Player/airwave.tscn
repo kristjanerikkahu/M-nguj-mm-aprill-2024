@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://twfqyyo6mpgk"]
 
 [ext_resource type="Shader" path="res://Shaders/airwave.gdshader" id="1_5fvhw"]
-[ext_resource type="Texture2D" uid="uid://dr40lsh0gxp1l" path="res://Artwork/airwave.png" id="2_1wuip"]
+[ext_resource type="Texture2D" uid="uid://dgug4b3y8m6pv" path="res://Artwork/airwave.png" id="2_1wuip"]
 [ext_resource type="Script" path="res://Player/airwave.gd" id="3_27uk3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i5x73"]

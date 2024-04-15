@@ -4,11 +4,11 @@ class_name Player
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var moving : bool = false
 var dashing : bool = false
-@export var cloud : PackedScene
-@export var death_particles : PackedScene
-@export var _dash_followup : PackedScene
-@export var _landing_particles : PackedScene
-@export var _walking_particles : PackedScene
+var cloud : PackedScene = preload("res://Powers/Cloud.tscn")
+var death_particles : PackedScene = preload("res://Player/death_particles.tscn")
+var _dash_followup : PackedScene = preload("res://Player/dash_follow_up.tscn")
+var _landing_particles : PackedScene = preload("res://Player/landing_particles.tscn")
+var _walking_particles : PackedScene = preload("res://Player/walking_particles.tscn")
 
 @onready var _timer_floor_coyote : Timer = $Timers/PlatformTimers/Coyote
 @onready var _timer_jump_buffer : Timer = $Timers/PlatformTimers/JumpBuffer
@@ -67,6 +67,7 @@ func summon_cloud() -> void:
 	cloud_instance.position = _cloud_spawn_position.global_position
 	get_tree().current_scene.add_child(cloud_instance)
 	_can_summon_cloud = false
+	_can_dash = true
 # TODO: Send death handling to master script
 
 func die() -> void:
@@ -74,7 +75,6 @@ func die() -> void:
 	var death_particles_instance = death_particles.instantiate()
 	death_particles_instance.position = global_position
 	get_tree().current_scene.add_child(death_particles_instance)
-	death_particles_instance.emitting = true
 	Gamemaster.player_death()
 	queue_free()
 #region Movement fu		_dash_direction = Vector2.RIGHT if $Sprite.flip_h else Vector2.LEFTnctions
@@ -87,7 +87,6 @@ func _handle_gravity_and_coyote(delta) -> void:
 		if _timer_floor_coyote.is_stopped():
 			_timer_floor_coyote.start()
 
-		print("stopping walk particle timer")
 		_timer_walk_particle.stop()
 	else:
 		_floor_coyote = true

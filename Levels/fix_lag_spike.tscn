@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciwbsedoj5mir"]
+
+[ext_resource type="Script" path="res://Levels/fix_lag_spike.gd" id="1_0nrc8"]
+
+[node name="FixLagSpike" type="CanvasLayer"]
+script = ExtResource("1_0nrc8")

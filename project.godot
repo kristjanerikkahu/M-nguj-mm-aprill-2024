@@ -22,6 +22,7 @@ Gamemaster="*res://Global Script/gamemaster.gd"
 BgMusic="*res://Global Script/BGMusic.tscn"
 DeathSound="*res://Global Script/death_sound.tscn"
 RespawnSound="*res://Global Script/RespawnSound.tscn"
+FixLagSpike="*res://Levels/fix_lag_spike.tscn"
 
 [display]
 
@@ -102,5 +103,8 @@ enter={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+global_illumination/voxel_gi/quality=1
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

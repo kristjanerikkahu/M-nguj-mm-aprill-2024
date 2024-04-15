@@ -1,7 +1,6 @@
 extends Marker2D
 
-@export var player : PackedScene
-
+var player : PackedScene = preload("res://Player/player.tscn")
 
 func resurrect_player():
 	RespawnSound.play()
