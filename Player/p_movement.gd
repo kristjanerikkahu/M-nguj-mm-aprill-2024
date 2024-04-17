@@ -2,51 +2,65 @@ extends CharacterBody2D
 class_name Player
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var moving : bool = false
-var dashing : bool = false
+
 var cloud : PackedScene = preload("res://Powers/Cloud.tscn")
 var death_particles : PackedScene = preload("res://Player/death_particles.tscn")
 var _dash_followup : PackedScene = preload("res://Player/dash_follow_up.tscn")
 var _landing_particles : PackedScene = preload("res://Player/landing_particles.tscn")
 var _walking_particles : PackedScene = preload("res://Player/walking_particles.tscn")
 
+#region Get Important Nodes
+# Timers
 @onready var _timer_floor_coyote : Timer = $Timers/PlatformTimers/Coyote
 @onready var _timer_jump_buffer : Timer = $Timers/PlatformTimers/JumpBuffer
 @onready var _timer_dash : Timer = $Timers/AbilityTimers/DashTimer
 @onready var _timer_dash_buffer : Timer = $Timers/PlatformTimers/DashBuffer
-@onready var _timer_walk_particle : Timer = $WalkingParticles/WalkParticleTimer
+@onready var _timer_walk_particle : Timer = $Timers/WalkParticleTimer
 
-@onready var _cloud_spawn_position : Marker2D = $CloudSpawn
-@onready var _cloud_check_raycast : RayCast2D = $CloudCheck
+# Cloud Spawning
+@onready var _cloud_spawn_position : Marker2D = $Cloud/CloudSpawn
+@onready var _cloud_check_raycast : RayCast2D = $Cloud/CloudCheck
+
+# Particles
 @onready var _dash_shockwave : Node2D = $DashParticles
+@onready var _landing_particles_position : Marker2D = $Particles/LandingParticles
+@onready var _walk_particles_position : Marker2D = $Particles/WalkingParticles
 
-@onready var _landing_particles_position : Marker2D = $LandingParticles
-@onready var _walk_particles_position : Marker2D = $WalkingParticles/WalkingParticles
-
-@onready var _camera : Camera2D = $"../SceneCamera"
+@onready var _camera : Camera2D = get_tree().current_scene.get_node("SceneCamera")
 @onready var _sprite : AnimatedSprite2D = $Sprite
 
-@onready var walk_sound: AudioStreamPlayer = $WalkSound
-@onready var land_sound : AudioStreamPlayer = $LandSound
-@onready var dash_sound : AudioStreamPlayer = $DashSound
+@onready var walk_sound: AudioStreamPlayer = $AudioFiles/WalkSound
+@onready var land_sound : AudioStreamPlayer = $AudioFiles/LandSound
+@onready var dash_sound : AudioStreamPlayer = $AudioFiles/DashSound
 
+#region Player action control variables
+var moving : bool = false
+
+# Buffering
 var _floor_coyote : bool = true
 var _jump_input_in_buffer : bool = false
 var _dash_input_in_buffer : bool = false
-# TODO: Configure movement and jump height
-@export var acceleration_time = 0.1
-@export var jump_height = 60
-@export var move_speed = 100
-@export var wall_climb_speed = 50
-# TODO: Configure dash length
-@export var dash_lengh : int = 100
+
+# Dashing
 var _can_dash : bool = true
+var dashing : bool = false
 var _dash_direction : Vector2
 var _dash_end_floating : bool = false
 
 var _can_summon_cloud : bool = true
 
-var _is_grounded : bool = true
+var _true_grounded : bool = true
+#endregion
+
+#region Player Stats
+@export var acceleration_time = 0.1
+@export var jump_height = 60
+@export var move_speed = 100
+@export var wall_climb_speed = 50
+@export var dash_lengh : int = 100
+#endregion
+
+
 
 # Handles mostly the movement, avoid checking anything else but movement here
 func _physics_process(delta) -> void:
@@ -82,7 +96,7 @@ func die() -> void:
 func _handle_gravity_and_coyote(delta) -> void:
 	if not is_on_floor():
 		# TODO: Wall jump?
-		_is_grounded = false
+		_true_grounded = false
 		velocity.y += gravity * delta
 		if _timer_floor_coyote.is_stopped():
 			_timer_floor_coyote.start()
@@ -93,9 +107,9 @@ func _handle_gravity_and_coyote(delta) -> void:
 		_timer_floor_coyote.stop()
 		_can_dash = true
 
-		if not _is_grounded:
+		if not _true_grounded:
 			_landing_particle_gen()
-			_is_grounded = true
+			_true_grounded = true
 
 		# HACK: Prolly a better way to do thiss
 		var rc_col = _cloud_check_raycast.get_collider()
@@ -159,7 +173,7 @@ func _handle_left_right_movement(delta) -> void:
 	var direction : float = Input.get_axis("move_left", "move_right")
 	var accel_per_frame = (move_speed / acceleration_time) * delta
 	if direction:
-		if _timer_walk_particle.is_stopped() and _is_grounded:
+		if _timer_walk_particle.is_stopped() and _true_grounded:
 			print("starting walk particle timer")
 			_timer_walk_particle.start()
 		velocity.x = move_toward(
@@ -175,6 +189,7 @@ func _handle_left_right_movement(delta) -> void:
 			accel_per_frame
 		)
 #endregion
+
 #region Input Buffers
 func _buffer_jump_input() -> void:
 	if Input.is_action_just_pressed("move_jump"):
@@ -185,6 +200,7 @@ func _buffer_dash_input() -> void:
 		_dash_input_in_buffer = true
 		_timer_dash_buffer.start()
 #endregion
+
 #region Timer timeouts
 func _on_coyote_timeout():
 	_floor_coyote = false

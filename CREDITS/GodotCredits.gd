@@ -33,11 +33,10 @@ var lines := []
 
 var credits = [
 	[
-		"A game by Awesome Game Company"
+		"A game by Game Jam team Mangumoos"
 	],[
 		"Programming",
 		"Richard Miikael Jaks",
-		"Raivo Rander"
 	],[
 		"Art",
 		"Semilla Tuberg"
