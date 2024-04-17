@@ -331,6 +331,7 @@ script = ExtResource("1_w4pfo")
 jump_height = 90
 move_speed = 142
 dash_lengh = 60
+_fall_gravity_reduction_multiplier = 0.02
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)

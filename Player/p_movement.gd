@@ -1,13 +1,16 @@
 extends CharacterBody2D
 class_name Player
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+#region Pre-load stuff
 var cloud : PackedScene = preload("res://Powers/Cloud.tscn")
 var death_particles : PackedScene = preload("res://Player/death_particles.tscn")
 var _dash_followup : PackedScene = preload("res://Player/dash_follow_up.tscn")
 var _landing_particles : PackedScene = preload("res://Player/landing_particles.tscn")
 var _walking_particles : PackedScene = preload("res://Player/walking_particles.tscn")
+#endregion
 
 #region Get Important Nodes
 # Timers
@@ -27,11 +30,14 @@ var _walking_particles : PackedScene = preload("res://Player/walking_particles.t
 @onready var _walk_particles_position : Marker2D = $Particles/WalkingParticles
 
 @onready var _camera : Camera2D = get_tree().current_scene.get_node("SceneCamera")
+
 @onready var _sprite : AnimatedSprite2D = $Sprite
 
+# Sounds
 @onready var walk_sound: AudioStreamPlayer = $AudioFiles/WalkSound
 @onready var land_sound : AudioStreamPlayer = $AudioFiles/LandSound
 @onready var dash_sound : AudioStreamPlayer = $AudioFiles/DashSound
+#endregion
 
 #region Player action control variables
 var moving : bool = false
@@ -58,9 +64,8 @@ var _true_grounded : bool = true
 @export var move_speed = 100
 @export var wall_climb_speed = 50
 @export var dash_lengh : int = 100
+@export var _fall_gravity_reduction_multiplier = 0.2
 #endregion
-
-
 
 # Handles mostly the movement, avoid checking anything else but movement here
 func _physics_process(delta) -> void:
@@ -82,7 +87,6 @@ func summon_cloud() -> void:
 	get_tree().current_scene.add_child(cloud_instance)
 	_can_summon_cloud = false
 	_can_dash = true
-# TODO: Send death handling to master script
 
 func die() -> void:
 	DeathSound.play()
@@ -91,12 +95,14 @@ func die() -> void:
 	get_tree().current_scene.add_child(death_particles_instance)
 	Gamemaster.player_death()
 	queue_free()
-#region Movement fu		_dash_direction = Vector2.RIGHT if $Sprite.flip_h else Vector2.LEFTnctions
-#region Up & Down, Jump, dash
+
+#region Movement functions
+#region Gravity & Coyote
 func _handle_gravity_and_coyote(delta) -> void:
 	if not is_on_floor():
-		# TODO: Wall jump?
 		_true_grounded = false
+		if velocity.y > 0:
+			velocity.y -= gravity * delta * _fall_gravity_reduction_multiplier
 		velocity.y += gravity * delta
 		if _timer_floor_coyote.is_stopped():
 			_timer_floor_coyote.start()
@@ -110,84 +116,106 @@ func _handle_gravity_and_coyote(delta) -> void:
 		if not _true_grounded:
 			_landing_particle_gen()
 			_true_grounded = true
+		
+		_check_if_collider_is_cloud()
 
-		# HACK: Prolly a better way to do thiss
-		var rc_col = _cloud_check_raycast.get_collider()
-		if rc_col and rc_col.owner and rc_col.owner.get_class() != "Cloud":
-			_can_summon_cloud = true
+func _check_if_collider_is_cloud() -> void:
+	# HACK: Prolly a better way to do this
+	var rc_col = _cloud_check_raycast.get_collider()
+	if rc_col and rc_col.owner and rc_col.owner.get_class() != "Cloud":
+		_can_summon_cloud = true
+#endregion
 
-func _landing_particle_gen():
-	var part = _landing_particles.instantiate()
-	part.position = _landing_particles_position.global_position
-	get_tree().current_scene.add_child(part)
-	land_sound.play()
-
-func _walking_particle_gen():
-	print("yo")
-	var part = _walking_particles.instantiate()
-	part.position = _walk_particles_position.global_position
-	part.get_node("WalkingParticles").flip_h = _sprite.flip_h
-	get_tree().current_scene.add_child(part)
-	walk_sound.play()
-	
-
-# TODO: Configure jumping to feel snappier
+#region Handlers
 func _handle_jump() -> void:
 	_buffer_jump_input()
-	if _jump_input_in_buffer and _floor_coyote:
-		_can_dash = true
-		_timer_jump_buffer.stop()
-		_jump_input_in_buffer = false
-		_floor_coyote = false
-		velocity.y = -sqrt(2 * gravity/2 * abs(jump_height))
-# TODO: Cancel dash when colliding?
+	if not (_jump_input_in_buffer and _floor_coyote):
+		return
+	_jump()
+
 func _handle_dash() -> void:
 	_buffer_dash_input()
 	if _can_dash and _dash_input_in_buffer:
-		_get_dash_dir()
-		_emit_dash_particles(_dash_direction)
-		_camera.shake(_dash_direction)
-		
-		dashing = true
-		_can_dash = false
-		_timer_dash.start()
-		dash_sound.play()
-		
+		_start_dash()
 	if dashing:
 		velocity = _dash_direction * (dash_lengh / _timer_dash.wait_time)
-	
 #endregion
-func _get_dash_dir():
+
+func _handle_left_right_movement(delta) -> void:
+	var direction : float = Input.get_axis("move_left", "move_right")
+	var accel_per_frame : float = (move_speed / acceleration_time) * delta
+	if direction:
+		_start_walking_particle_timer()
+		_move(direction, accel_per_frame)
+	else:
+		_timer_walk_particle.stop()
+		_stop(accel_per_frame)
+#endregion
+
+#region Helper Functions
+func _move(direction : float, accel_per_frame : float) -> void:
+	velocity.x = move_toward(
+			velocity.x, 
+			move_speed * direction, 
+			accel_per_frame
+	)
+
+func _stop(accel_per_frame : float) -> void:
+	velocity.x = move_toward(
+			velocity.x, 
+			0, 
+			accel_per_frame
+	)
+
+func _jump() -> void:
+	_can_dash = true
+	_jump_input_in_buffer = false
+	_floor_coyote = false
+	
+	velocity.y = -sqrt(2 * gravity/2 * abs(jump_height))
+	
+	_timer_jump_buffer.stop()
+
+func _get_dash_dir() -> void:
 	var x_dir = Input.get_axis("move_left", "move_right")
 	var y_dir = Input.get_axis("move_up", "move_down")
 	_dash_direction = Vector2(x_dir, y_dir).normalized()
 	if _dash_direction.is_equal_approx(Vector2.ZERO):
 		_dash_direction = Vector2.UP
 
+func _start_dash() -> void:
+	_get_dash_dir()
+	_emit_dash_particles(_dash_direction)
+	_camera.shake(_dash_direction)
+
+	dashing = true
+	_can_dash = false
+	_timer_dash.start()
+	dash_sound.play()
+#endregion
+#region Generate particles
+func _landing_particle_gen():
+	var part = _landing_particles.instantiate()
+	part.position = _landing_particles_position.global_position
+	get_tree().current_scene.add_child(part)
+	land_sound.play()
+
+func _start_walking_particle_timer() -> void:
+	if _timer_walk_particle.is_stopped() and _true_grounded:
+		_timer_walk_particle.start()
+
+func _walking_particle_gen():
+	var part = _walking_particles.instantiate()
+	part.position = _walk_particles_position.global_position
+	part.get_node("WalkingParticles").flip_h = _sprite.flip_h
+	get_tree().current_scene.add_child(part)
+	walk_sound.play()
+	
 func _emit_dash_particles(dir : Vector2):
 	var followup = _dash_followup.instantiate()
 	followup.dir = _dash_direction
 	followup.position = global_position
 	get_tree().current_scene.add_child(followup)
-func _handle_left_right_movement(delta) -> void:
-	var direction : float = Input.get_axis("move_left", "move_right")
-	var accel_per_frame = (move_speed / acceleration_time) * delta
-	if direction:
-		if _timer_walk_particle.is_stopped() and _true_grounded:
-			print("starting walk particle timer")
-			_timer_walk_particle.start()
-		velocity.x = move_toward(
-			velocity.x, 
-			move_speed * direction, 
-			accel_per_frame
-		)
-	else:
-		_timer_walk_particle.stop()
-		velocity.x = move_toward(
-			velocity.x, 
-			0, 
-			accel_per_frame
-		)
 #endregion
 
 #region Input Buffers
